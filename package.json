@@ -1,8 +1,18 @@
 {
   "name": "simpleblockchain",
   "version": "1.0.0",
-  "main": "server.js",
-  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "cd ./dist && node ./index.js",
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "author": "Daniel Romeo Mamphekgo",
+  "license": "ISC",
   "dependencies": {
     "crypto-js": "^4.0.0"
   }
