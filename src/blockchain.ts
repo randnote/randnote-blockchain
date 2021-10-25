@@ -5,6 +5,11 @@ import Transaction from './transaction'
 import Block from './block'
 
 class Blockchain{
+	chain: any;
+	difficulty: any;
+	pendingTransactions: any;
+	miningReward: any;
+
 	constructor(){
 		this.chain = [this.createGenesisBlock()];
 		this.difficulty = 2;
@@ -20,7 +25,7 @@ class Blockchain{
 		return this.chain[this.chain.length -1];
 	}
 
-	minePendingTransactions(miningRewardAddress){
+	minePendingTransactions(miningRewardAddress:any){
 		let block = new Block(Date.now(), this.pendingTransactions) // currently we are just mining all the transactions that are pending
 		block.mineBlock(this.difficulty);
 
@@ -33,11 +38,11 @@ class Blockchain{
 		]
 	}
 
-	createTransaction(transaction){
+	createTransaction(transaction:any){
 		this.pendingTransactions.push(transaction);
 	}
 
-	getBalanceOfAddress(address){
+	getBalanceOfAddress(address:any){
 		let balance = 0;
 
 		for( const block of this.chain){
@@ -75,14 +80,4 @@ class Blockchain{
 
 
 
-let coin  = new Blockchain();
-
-coin.createTransaction(new Transaction('address1', 'address2', 100 ))
-coin.createTransaction(new Transaction('address2', 'address3', 30 ))
-
-console.log('\n Starting the miner...');
-coin.minePendingTransactions('Romeo');
-
-console.log('\n Balance of Romeo is: '+ coin.getBalanceOfAddress('address2'));
-
-console.log(JSON.stringify(coin, null, 4));
+export default Blockchain;

@@ -63,11 +63,5 @@ var Blockchain = /** @class */ (function () {
     };
     return Blockchain;
 }());
-var coin = new Blockchain();
-coin.createTransaction(new transaction_1.default('address1', 'address2', 100));
-coin.createTransaction(new transaction_1.default('address2', 'address3', 30));
-console.log('\n Starting the miner...');
-coin.minePendingTransactions('Romeo');
-console.log('\n Balance of Romeo is: ' + coin.getBalanceOfAddress('address2'));
-console.log(JSON.stringify(coin, null, 4));
+exports.default = Blockchain;
 //# sourceMappingURL=blockchain.js.map
