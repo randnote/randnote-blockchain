@@ -33,7 +33,7 @@ class Block{
 			this.nonce++;
 			this.hash = this.calculateHash();
 		}
-		console.log("BLOCK MINED: " +this.hash);
+		console.log("BLOCK MINED: " +this.hash); // just displays the hash string
 	}
 	
 }
