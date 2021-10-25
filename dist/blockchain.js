@@ -1,9 +1,12 @@
 "use strict";
 // const Transaction = require('./transaction')
 // const Block = require("./block");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var transaction_1 = require("./transaction");
-var block_1 = require("./block");
+var transaction_1 = __importDefault(require("./transaction"));
+var block_1 = __importDefault(require("./block"));
 var Blockchain = /** @class */ (function () {
     function Blockchain() {
         this.chain = [this.createGenesisBlock()];

@@ -17,6 +17,21 @@ db.put('name', 'Level', function (err) {
   })
 })
 
- db.put('name', 'sam')
- db.put('name', 'kim')
+ db.put('1', [{
+  "dan": {
+    1: 200
+  }
+ }])
+ db.put('2', 'kim')
+ db.put('3', 'frank')
 
+ db.delete('1')
+  db.delete('1')
+   db.delete('1')
+
+db.createReadStream({
+  gte: 'user'
+  lte: 'user'
+}).on(‘data’, function(data) {
+  console.log(data.key)
+})
