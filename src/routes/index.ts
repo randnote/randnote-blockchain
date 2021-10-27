@@ -5,6 +5,7 @@ const getBlockchain = () =>{
 }
 
 module.exports = (app: Application) => {
-	// const User = require("../controllers/admin.controller");
-	app.get("/getblockchain", getBlockchain);
+	const Blockchain = require("../controllers/index");
+	app.get("/blockchain", getBlockchain);
+	app.get("/transactions", Blockchain.getAllTransactions)
 };
