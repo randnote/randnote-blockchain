@@ -75,17 +75,21 @@ class Blockchain{
 	}
 
 	// function that gets all the transactions in all the blocks by iteration:
-	getAllTransactions(): void{
+	getAllTransactions(){
 		let count = 0;
+		let transactionsArray:any = [];
+		let transactionsArrayFormatted: string[] = [];
 		for (let i = 0; i < this.chain.length; i++) {
-			let transactionsArray = this.chain[i].transactions;
-			for (let j = 0; j < transactionsArray.length; j++) {
-				const {fromAddress, toAddress, amount} = transactionsArray[j]
-				console.log(`${count}. fromAddress: ${fromAddress}, \t toAddress: ${toAddress},\t amount : ${amount}`)
-				count++;
-			}
+			transactionsArray.push( this.chain[i].transactions);
+			// for (let j = 0; j < transactionsArray.length; j++) {
+			// 	const {fromAddress, toAddress, amount} = transactionsArray[j]
+			// 	transactionsArrayFormatted.push(`${count}. fromAddress: ${fromAddress}, \t toAddress: ${toAddress},\t amount : ${amount}`)
+			// 	count++;
+
+			// }
 			
 		}
+		return transactionsArray;
 	}
 }
 

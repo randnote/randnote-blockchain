@@ -66,14 +66,17 @@ var Blockchain = /** @class */ (function () {
     // function that gets all the transactions in all the blocks by iteration:
     Blockchain.prototype.getAllTransactions = function () {
         var count = 0;
+        var transactionsArray = [];
+        var transactionsArrayFormatted = [];
         for (var i = 0; i < this.chain.length; i++) {
-            var transactionsArray = this.chain[i].transactions;
-            for (var j = 0; j < transactionsArray.length; j++) {
-                var _a = transactionsArray[j], fromAddress = _a.fromAddress, toAddress = _a.toAddress;
-                console.log(count + ". fromAddress: " + fromAddress + ", \t toAddress: " + toAddress);
-                count++;
-            }
+            transactionsArray.push(this.chain[i].transactions);
+            // for (let j = 0; j < transactionsArray.length; j++) {
+            // 	const {fromAddress, toAddress, amount} = transactionsArray[j]
+            // 	transactionsArrayFormatted.push(`${count}. fromAddress: ${fromAddress}, \t toAddress: ${toAddress},\t amount : ${amount}`)
+            // 	count++;
+            // }
         }
+        return transactionsArray;
     };
     return Blockchain;
 }());

@@ -22,15 +22,14 @@ console.log(note.getAllTransactions());
 
 
 exports.getBlockchain =  (req:Request, res:Response) => {
-    res.send(100);
+    res.status(200).send("yes");
 }
 
 exports.getAllTransactions = (req:Request, res:Response) => {
-
-    res.send(note.getAllTransactions);
-
-    // Admin.getAll((err:any, data:any): any => {
-    //   if (err)
+    console.log(note.getAllTransactions())
+    res.status(200).send(note.getAllTransactions());
+    // res.status(200).send("yes");
+    
     //     res.status(500).send({
     //       message:
     //         err.message || "Some error occurred while retrieving Admins."

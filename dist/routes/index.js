@@ -4,7 +4,8 @@ var getBlockchain = function () {
     return 100;
 };
 module.exports = function (app) {
-    // const User = require("../controllers/admin.controller");
-    app.get("/getblockchain", getBlockchain);
+    var Blockchain = require("../controllers/index");
+    app.get("/blockchain", getBlockchain);
+    app.get("/transactions", Blockchain.getAllTransactions);
 };
 //# sourceMappingURL=index.js.map
