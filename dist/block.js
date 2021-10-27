@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var SHA256 = require('crypto-js/sha256');
 var Block = /** @class */ (function () {
     function Block(timestamp, transactions, previousHash) {
-        if (previousHash === void 0) { previousHash = ''; }
         this.timestamp = timestamp;
         this.transactions = transactions;
         this.previousHash = previousHash;

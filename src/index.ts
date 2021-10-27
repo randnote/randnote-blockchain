@@ -50,14 +50,21 @@ app.listen(8033, () => console.log(`server started on port 8033`));
 
 //--- blochain creation....------------------------------------------
 
-// let coin  = new Blockchain();
+let coin  = new Blockchain();
+coin.createTransaction(new Transaction('frank', 'paul', 100 ))
+coin.createTransaction(new Transaction('sam', 'kim', 30 ))
+coin.createTransaction(new Transaction('sam', 'jim', 30 ))
 
-// coin.createTransaction(new Transaction('address1', 'romeo', 100 ))
-// // coin.createTransaction(new Transaction('romeo', 'address3', 30 ))
+console.log('\nStarting the miner...');
+coin.minePendingTransactions('romeo');
+console.log('\nBalance of Romeo is: '+ coin.getBalanceOfAddress('romeo'));
 
-// console.log('\n Starting the miner...');
-// coin.minePendingTransactions('Romeo');
-// console.log('\n Balance of Romeo is: '+ coin.getBalanceOfAddress('romeo'));
+//second mining:
+coin.minePendingTransactions('jackie');
+console.log('Balance of jackie is: '+ coin.getBalanceOfAddress('jackie'));
+console.log('\n');
+console.log(coin.getAllTransactions());
+
 
 // // create a second transaction:
 // coin.createTransaction(new Transaction('address1', 'romeo', 100 ))

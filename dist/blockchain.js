@@ -1,12 +1,11 @@
 "use strict";
-// const Transaction = require('./transaction')
-// const Block = require("./block");
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var transaction_1 = __importDefault(require("./transaction"));
 var block_1 = __importDefault(require("./block"));
+var time_1 = __importDefault(require("./time"));
 var Blockchain = /** @class */ (function () {
     function Blockchain() {
         this.chain = [this.createGenesisBlock()];
@@ -15,13 +14,13 @@ var Blockchain = /** @class */ (function () {
         this.miningReward = 100;
     }
     Blockchain.prototype.createGenesisBlock = function () {
-        return new block_1.default("2021/01/01", [], "0");
+        return new block_1.default(time_1.default(), [], "0");
     };
     Blockchain.prototype.getLatestBlock = function () {
         return this.chain[this.chain.length - 1];
     };
     Blockchain.prototype.minePendingTransactions = function (miningRewardAddress) {
-        var block = new block_1.default(Date.now(), this.pendingTransactions); // currently we are just mining all the transactions that are pending
+        var block = new block_1.default(time_1.default(), this.pendingTransactions, this.getLatestBlock().hash); // currently we are just mining all the transactions that are pending
         block.mineBlock(this.difficulty);
         console.log("Block successfully mined!");
         this.chain.push(block);
@@ -63,6 +62,18 @@ var Blockchain = /** @class */ (function () {
             }
         }
         return true;
+    };
+    // function that gets all the transactions in all the blocks by iteration:
+    Blockchain.prototype.getAllTransactions = function () {
+        var count = 0;
+        for (var i = 0; i < this.chain.length; i++) {
+            var transactionsArray = this.chain[i].transactions;
+            for (var j = 0; j < transactionsArray.length; j++) {
+                var _a = transactionsArray[j], fromAddress = _a.fromAddress, toAddress = _a.toAddress;
+                console.log(count + ". fromAddress: " + fromAddress + ", \t toAddress: " + toAddress);
+                count++;
+            }
+        }
     };
     return Blockchain;
 }());

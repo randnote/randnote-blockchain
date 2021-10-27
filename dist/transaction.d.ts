@@ -1,4 +1,5 @@
 declare class Transaction {
+    timestamp: any;
     fromAddress: any;
     toAddress: any;
     amount: number;

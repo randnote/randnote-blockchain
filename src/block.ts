@@ -1,5 +1,5 @@
 const SHA256 = require('crypto-js/sha256');
-
+import getTimeFormatted from "./time";
 class Block{
 	index: any;
 	block:any;
@@ -10,7 +10,7 @@ class Block{
 	hash: any;
 	nonce: any;
 
-	constructor(timestamp: any, transactions: any, previousHash: string = ''){
+	constructor(timestamp: any, transactions: any, previousHash: string ){
 		this.timestamp = timestamp;
 		this.transactions = transactions;
 		this.previousHash = previousHash;
@@ -27,7 +27,7 @@ class Block{
 			this.nonce ).toString();
 	}
 
-	mineBlock(difficulty: any){
+	mineBlock(difficulty: number){
 		console.log('Mining...');
 		while(this.hash.substring(0, difficulty) != Array(difficulty + 1 ).join("0") ){
 			this.nonce++;
@@ -35,7 +35,6 @@ class Block{
 		}
 		console.log("BLOCK MINED: " +this.hash); // just displays the hash string
 	}
-	
 }
 
 export default Block;

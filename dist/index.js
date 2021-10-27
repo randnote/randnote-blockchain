@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var level = require('level');
+var blockchain_1 = __importDefault(require("./blockchain"));
+var transaction_1 = __importDefault(require("./transaction"));
 var cors = require("cors");
 var bodyParser = require("body-parser");
 var app = express_1.default();
@@ -31,12 +33,18 @@ require("./database/index");
 require("./routes/index")(app);
 app.listen(8033, function () { return console.log("server started on port 8033"); });
 //--- blochain creation....------------------------------------------
-// let coin  = new Blockchain();
-// coin.createTransaction(new Transaction('address1', 'romeo', 100 ))
-// // coin.createTransaction(new Transaction('romeo', 'address3', 30 ))
-// console.log('\n Starting the miner...');
-// coin.minePendingTransactions('Romeo');
-// console.log('\n Balance of Romeo is: '+ coin.getBalanceOfAddress('romeo'));
+var coin = new blockchain_1.default();
+coin.createTransaction(new transaction_1.default('frank', 'paul', 100));
+coin.createTransaction(new transaction_1.default('sam', 'kim', 30));
+coin.createTransaction(new transaction_1.default('sam', 'jim', 30));
+console.log('\n Starting the miner...');
+coin.minePendingTransactions('romeo');
+console.log('\n Balance of Romeo is: ' + coin.getBalanceOfAddress('romeo'));
+//second mining:
+coin.minePendingTransactions('jackie');
+console.log('Balance of jackie is: ' + coin.getBalanceOfAddress('jackie'));
+console.log('\n');
+console.log(coin.getAllTransactions());
 // // create a second transaction:
 // coin.createTransaction(new Transaction('address1', 'romeo', 100 ))
 // // second mining:

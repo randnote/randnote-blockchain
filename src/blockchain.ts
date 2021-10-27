@@ -1,8 +1,6 @@
-// const Transaction = require('./transaction')
-// const Block = require("./block");
-
 import Transaction from './transaction'
 import Block from './block'
+import getTimeFormatted from './time';
 
 class Blockchain{
 	chain: any;
@@ -18,7 +16,7 @@ class Blockchain{
 	}
 
 	createGenesisBlock(){
-		return new Block("2021/01/01", [], "0");
+		return new Block(getTimeFormatted(), [], "0");
 	}
 
 	getLatestBlock(){
@@ -26,7 +24,7 @@ class Blockchain{
 	}
 
 	minePendingTransactions(miningRewardAddress:any){
-		let block = new Block(Date.now(), this.pendingTransactions) // currently we are just mining all the transactions that are pending
+		let block = new Block(getTimeFormatted(), this.pendingTransactions, this.getLatestBlock().hash) // currently we are just mining all the transactions that are pending
 		block.mineBlock(this.difficulty);
 
 		console.log("Block successfully mined!");
@@ -75,9 +73,20 @@ class Blockchain{
 		}
 		return true;
 	}
+
+	// function that gets all the transactions in all the blocks by iteration:
+	getAllTransactions(): void{
+		let count = 0;
+		for (let i = 0; i < this.chain.length; i++) {
+			let transactionsArray = this.chain[i].transactions;
+			for (let j = 0; j < transactionsArray.length; j++) {
+				const {fromAddress, toAddress, amount} = transactionsArray[j]
+				console.log(`${count}. fromAddress: ${fromAddress}, \t toAddress: ${toAddress},\t amount : ${amount}`)
+				count++;
+			}
+			
+		}
+	}
 }
-
-
-
 
 export default Blockchain;
