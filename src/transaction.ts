@@ -1,6 +1,6 @@
 import getTimeFormatted from "./time";
 
-export interface TransactionInterface{
+export interface TransactionInterface {
 	timestamp?: string;
 	fromAddress: string;
 	privateKey?: string;
@@ -14,7 +14,7 @@ class Transaction {
 	toAddress: any;
 	amount: number;
 
-	constructor(fromAddress:any, toAddress:any, amount:any){
+	constructor(fromAddress: any, toAddress: any, amount: any) {
 		this.timestamp = getTimeFormatted();
 		this.fromAddress = fromAddress;
 		this.toAddress = toAddress;

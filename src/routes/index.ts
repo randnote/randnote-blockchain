@@ -1,16 +1,16 @@
 import { Application } from "express";
 
-const getBlockchain = () =>{
+const getBlockchain = () => {
 	return 100;
-}
+};
 
 module.exports = (app: Application) => {
 	const Blockchain = require("../controllers/index");
 	app.get("/blockchain", getBlockchain);
-	app.get("/transactions", Blockchain.getAllTransactions)
+	app.get("/transactions", Blockchain.getAllTransactions);
 
 	/*How this will work, is that:
 	1. the miner sends a request to mine a block, 
 	*/
-	app.get("/mine/:minerAddress", Blockchain.mine)
+	app.get("/mine/:minerAddress", Blockchain.mine);
 };

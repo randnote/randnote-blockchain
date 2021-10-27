@@ -1,7 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from "express";
-const level = require('level')
-import Blockchain from	'./blockchain'
-import Transaction from './transaction'
+const level = require("level");
+import Blockchain from "./blockchain";
+import Transaction from "./transaction";
 
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -9,7 +9,6 @@ const app: Application = express();
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
-
 
 var allowedOrigins = ["http://localhost:3000", "http://locahost:3000/admin"];
 app.use(
@@ -33,6 +32,6 @@ app.use(
 	})
 );
 
-require("./database/index")
+require("./database/index");
 require("./routes/index")(app);
 app.listen(8033, () => console.log(`server started on port 8033`));

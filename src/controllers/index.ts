@@ -36,6 +36,7 @@ exports.createTransaction = ((req:Request, res:Response) => {
       }
 
       const newTransaction: TransactionInterface = {
+        
         fromAddress: req.body.fromAddress,
         privateKey: req.body.privatekey,
         toAddress: req.body.toAddress,
