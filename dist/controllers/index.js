@@ -19,6 +19,35 @@ console.log('Balance of jackie is: ' + note.getBalanceOfAddress('jackie'));
 console.log('\n');
 console.log(note.getAllTransactions());
 //------------------------------------------------------------------------------
+exports.mine = function (req, res) {
+    var minerAddress = req.params.minerAddress;
+    res.status(200).send({
+        reward: 100
+    });
+};
+exports.createTransaction = (function (req, res) {
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+        console.log("empty");
+    }
+    var newTransaction = {
+        fromAddress: req.body.fromAddress,
+        privateKey: req.body.privatekey,
+        toAddress: req.body.toAddress,
+        amount: req.body.amount
+    };
+    // transaction may be accepted or refused, after validation is completed
+    // make validation here:
+    res.status(200).send({
+        message: "Transaction from address: this, to address: this, was successful"
+    });
+});
+exports.getAddressBalance = function (req, res) {
+    var address = req.params.address;
+    res.status(200).send("100");
+};
 exports.getBlockchain = function (req, res) {
     res.status(200).send("yes");
 };

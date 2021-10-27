@@ -20,6 +20,8 @@ var Blockchain = /** @class */ (function () {
         return this.chain[this.chain.length - 1];
     };
     Blockchain.prototype.minePendingTransactions = function (miningRewardAddress) {
+        /* make this function delay, till there are atleast 5 transactions,
+        if still less, then dont send anything...*/
         var block = new block_1.default(time_1.default(), this.pendingTransactions, this.getLatestBlock().hash); // currently we are just mining all the transactions that are pending
         block.mineBlock(this.difficulty);
         console.log("Block successfully mined!");

@@ -24,6 +24,9 @@ class Blockchain{
 	}
 
 	minePendingTransactions(miningRewardAddress:any){
+		/* make this function delay, till there are atleast 5 transactions,
+		if still less, then dont send anything...*/
+
 		let block = new Block(getTimeFormatted(), this.pendingTransactions, this.getLatestBlock().hash) // currently we are just mining all the transactions that are pending
 		block.mineBlock(this.difficulty);
 

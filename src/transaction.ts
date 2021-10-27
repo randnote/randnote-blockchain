@@ -1,5 +1,13 @@
 import getTimeFormatted from "./time";
 
+export interface TransactionInterface{
+	timestamp?: string;
+	fromAddress: string;
+	privateKey?: string;
+	toAddress: string;
+	amount: number;
+}
+
 class Transaction {
 	timestamp: any;
 	fromAddress: any;
