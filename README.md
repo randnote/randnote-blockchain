@@ -3,6 +3,9 @@
 ## What is RandNote? 
 1. RandNote is a virtual crypto currency and ecosystem that was created by Daniel Mamphekgo as a learning demonstaration.
 
+## Before you read further:
+- This application is a makeshift blockchain NOT intended to be used in production or anywhere else(except for learning purposes)... So don't be too hard on how I built the chain and the entire ecosystem for that matter, just read, learn and make pull requests if you will...
+
 ## What does this ecosystem consist of ?
 1. The server applicatio(which is the project you are currently viewing)
 2. The website; where users will be able to login, generate a private key and purchase the crypto note. They will also be able to buy with their bank cards(will virtuall be implemented). The users will not need to login to see the price of the the Note as it will be on the homepage.

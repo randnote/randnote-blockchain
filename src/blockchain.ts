@@ -27,6 +27,8 @@ class Blockchain {
 		/* make this function delay, till there are atleast 5 transactions,
 		if still less, then dont send anything...*/
 
+		
+
 		let block = new Block(
 			getTimeFormatted(),
 			this.pendingTransactions,
@@ -52,24 +54,33 @@ class Blockchain {
 		/* if the client queries with an empty string or null for the miningSolution, then they just want the block to mine,
 		however if they send both miningRewardAddress and the miningSolution, then they think they have a solution... */
 
+			
 		if (!miningSolution.length || miningSolution == null) {
 			// only give them the block information
 			let block = new Block(
 				getTimeFormatted(),
-				this.pendingTransactions,
+				this.pendingTransactions, // sending the first 4 transactions to with the block
 				this.getLatestBlock().hash
 			);
 			result(null, block, this.difficulty); // send the blockchain data back to the user, along with the difficulty...
 		}
 		// otherwise it means they have solved the problem... or so they think...
-		//// code here to check...
+		// so we mine our own block and let them mine it as well and compare the results
+		let mymine = block.mineBlock(this.difficulty);
+		let yourmine = miningSolution;
 
-		console.log("Block successfully mined!");
-		this.chain.push(block);
+		if(mymine == yourmine){ // success
+			this.chain.push(block);
+			console.log("Block successfully mined!");
+			this.chain.push(block);
 
-		this.pendingTransactions = [
-			new Transaction(null, miningRewardAddress, this.miningReward),
-		];
+
+			this.pendingTransactions = [
+				new Transaction(null, miningRewardAddress, this.miningReward),
+			];
+		}else{
+			  result({ result: "wrong solution" }, null);
+		}	
 	}
 
 	addTransaction(transaction: any): void {
