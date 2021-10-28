@@ -10,5 +10,6 @@ declare class Block {
     constructor(timestamp: any, transactions: any, previousHash: string);
     calculateHash(): any;
     mineBlock(difficulty: number): void;
+    hasValidTransactions(): boolean;
 }
 export default Block;

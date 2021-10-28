@@ -5,19 +5,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var blockchain_1 = __importDefault(require("../blockchain"));
 var transaction_1 = __importDefault(require("../transaction"));
+// imports for testing purposes:
+var elliptic_1 = __importDefault(require("elliptic"));
+var EC = elliptic_1.default.ec;
+var ec = new EC("secp256k1");
+// sampling giving keys to the server and adding a transaction:
 var note = new blockchain_1.default();
-// create a blockchain: FAKE TRANSACTIONS AND MINES------------------------------------------
-note.createTransaction(new transaction_1.default("frank", "paul", 100));
-note.createTransaction(new transaction_1.default("sam", "kim", 30));
-note.createTransaction(new transaction_1.default("sam", "jim", 30));
+var myKey = ec.keyFromPrivate('f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0'); // passing in the private key
+var myWalletAddress = myKey.getPublic('hex'); // mywalletaddress is my public key
+// create sample transaction and sign it:
+var tx1 = new transaction_1.default(myWalletAddress, 'paul', 100);
+tx1.signTransaction(myKey);
+note.addTransaction(tx1);
 console.log("\nStarting the miner...");
-note.minePendingTransactions("romeo");
-console.log("\nBalance of Romeo is: " + note.getBalanceOfAddress("romeo"));
+note.minePendingTransactions("paul");
+console.log("\nBalance of Romeo is: " + note.getBalanceOfAddress("paul"));
 //second mining:
 note.minePendingTransactions("jackie");
-console.log("Balance of jackie is: " + note.getBalanceOfAddress("jackie"));
+console.log("Balance of paul is: " + note.getBalanceOfAddress("paul"));
 console.log("\n");
-console.log(note.getAllTransactions());
+// console.log(note.getAllTransactions());
 //------------------------------------------------------------------------------
 exports.mine = function (req, res) {
     var minerAddress = req.params.minerAddress;

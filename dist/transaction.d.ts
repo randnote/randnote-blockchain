@@ -10,6 +10,7 @@ declare class Transaction {
     fromAddress: any;
     toAddress: any;
     amount: number;
+    signature: string;
     constructor(fromAddress: any, toAddress: any, amount: any);
     calculateHash(): any;
     signTransaction(signingKey: any): void;

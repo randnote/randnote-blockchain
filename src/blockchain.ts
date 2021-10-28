@@ -43,19 +43,19 @@ class Blockchain {
 		];
 	}
 
-	addTransaction(transaction: any) : void{
-		if(!transaction.fromAddress || !transaction.toAddress){
-			throw new Error('Transaction must include from and to address');
+	addTransaction(transaction: any): void {
+		if (!transaction.fromAddress || !transaction.toAddress) {
+			throw new Error("Transaction must include from and to address");
 		}
 
-		if(!transaction.isValid()){
+		if (!transaction.isValid()) {
 			throw new Error("Cannot add invalid tranasaction to chain");
 		}
 
 		this.pendingTransactions.push(transaction);
 	}
 
-	getBalanceOfAddress(address: string) : number{
+	getBalanceOfAddress(address: string): number {
 		let balance = 0;
 
 		for (const block of this.chain) {
@@ -71,13 +71,13 @@ class Blockchain {
 		return balance;
 	}
 
-	isChainValid() :boolean{
+	isChainValid(): boolean {
 		// traverse the entire blockchain and verify that the blocks are linked properly
 		for (let i = 1; i < this.chain.length; i++) {
 			const currentBlock = this.chain[i];
 			const previousBlock = this.chain[i - 1];
 
-			if(!currentBlock.hasValidTransactions()){
+			if (!currentBlock.hasValidTransactions()) {
 				return false;
 			}
 

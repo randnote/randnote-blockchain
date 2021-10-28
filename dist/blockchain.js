@@ -31,7 +31,13 @@ var Blockchain = /** @class */ (function () {
             new transaction_1.default(null, miningRewardAddress, this.miningReward),
         ];
     };
-    Blockchain.prototype.createTransaction = function (transaction) {
+    Blockchain.prototype.addTransaction = function (transaction) {
+        if (!transaction.fromAddress || !transaction.toAddress) {
+            throw new Error("Transaction must include from and to address");
+        }
+        if (!transaction.isValid()) {
+            throw new Error("Cannot add invalid tranasaction to chain");
+        }
         this.pendingTransactions.push(transaction);
     };
     Blockchain.prototype.getBalanceOfAddress = function (address) {
@@ -55,6 +61,9 @@ var Blockchain = /** @class */ (function () {
         for (var i = 1; i < this.chain.length; i++) {
             var currentBlock = this.chain[i];
             var previousBlock = this.chain[i - 1];
+            if (!currentBlock.hasValidTransactions()) {
+                return false;
+            }
             // confirms the hash of every block using its own data
             if (currentBlock.hash !== currentBlock.calculateHash()) {
                 return false;

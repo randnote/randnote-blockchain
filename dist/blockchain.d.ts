@@ -7,9 +7,9 @@ declare class Blockchain {
     constructor();
     createGenesisBlock(): Block;
     getLatestBlock(): any;
-    minePendingTransactions(miningRewardAddress: any): void;
-    createTransaction(transaction: any): void;
-    getBalanceOfAddress(address: any): number;
+    minePendingTransactions(miningRewardAddress: string): void;
+    addTransaction(transaction: any): void;
+    getBalanceOfAddress(address: string): number;
     isChainValid(): boolean;
     getAllTransactions(): any;
 }

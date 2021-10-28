@@ -41,9 +41,9 @@ class Block {
 		console.log("BLOCK MINED: " + this.hash); // just displays the hash string
 	}
 
-	hasValidTransactions(){
-		for(const tx of this.transactionss){
-			if(!tx.isValid()){
+	hasValidTransactions() {
+		for (const tx of this.transactions) {
+			if (!tx.isValid()) {
 				return false;
 			}
 		}

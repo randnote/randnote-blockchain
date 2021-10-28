@@ -2,22 +2,30 @@ import { Application, Request, Response, NextFunction } from "express";
 import Blockchain from "../blockchain";
 import Transaction, { TransactionInterface } from "../transaction";
 
-let note = new Blockchain();
-// create a blockchain: FAKE TRANSACTIONS AND MINES------------------------------------------
+// imports for testing purposes:
+import Elliptic from "elliptic";
+const EC = Elliptic.ec;
+const ec = new EC("secp256k1");
 
-note.createTransaction(new Transaction("frank", "paul", 100));
-note.createTransaction(new Transaction("sam", "kim", 30));
-note.createTransaction(new Transaction("sam", "jim", 30));
+// sampling giving keys to the server and adding a transaction:
+let note = new Blockchain();
+const myKey = ec.keyFromPrivate('f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0'); // passing in the private key
+const myWalletAddress = myKey.getPublic('hex'); // mywalletaddress is my public key
+
+// create sample transaction and sign it:
+let tx1 = new Transaction(myWalletAddress, 'paul', 100);
+tx1.signTransaction(myKey);
+note.addTransaction(tx1);
 
 console.log("\nStarting the miner...");
-note.minePendingTransactions("romeo");
-console.log("\nBalance of Romeo is: " + note.getBalanceOfAddress("romeo"));
+note.minePendingTransactions("paul");
+console.log("\nBalance of paul is: " + note.getBalanceOfAddress("paul"));
 
 //second mining:
 note.minePendingTransactions("jackie");
-console.log("Balance of jackie is: " + note.getBalanceOfAddress("jackie"));
+console.log("Balance of paul is: " + note.getBalanceOfAddress("paul"));
 console.log("\n");
-console.log(note.getAllTransactions());
+// console.log(note.getAllTransactions());
 //------------------------------------------------------------------------------
 
 exports.mine = (req: Request, res: Response) => {
