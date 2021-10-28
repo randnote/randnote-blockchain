@@ -32,7 +32,7 @@ console.log("\n");
 
 exports.mine = (req: Request, res: Response) => {
 	Blockchain.minePendingTransactionsClient(
-		req.params.minerAddress,
+		req.params.minerAddress, req.params.minerSolution,
 		(err: any, data: any): any => {
 			if (err)
 				res.status(500).send({

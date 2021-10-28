@@ -15,6 +15,10 @@
 - You might be wondering- what will happend if there are multipe clients trying to solve the hash = answer is - the first to send the hash is the winner. all the others will get a status 200 however with a 'sorry, did not mine' message, and so they will try again for the next block.
 - This means that the server application will always be running solving hashes as well(which is absolutely insane)... it is what it is.
 
+## How many transactions per block?
+- Currently that amount varies, We have not added a timer that only loads a new block after every 10 minutes(like Bitcoin), instead there could be as little as 1 to as many as a billion+ transactions because mining only happens when a 3rd party node asks to mine the block... 
+- This is obviously a big issue and will be solved(so, contribute and solve it yourself lol).
+
 ## How does it all work? 
 - The users create an account and login, they then create a wallet where a public and private key will be generated for them through the website. The system will encrypt the private keys before storing it in the backend.
 - Users will also be able to virtually add their bank card and purchase crypto on the platform(website). Users will be able to send RandNote to other users via a public key. If the user sends Notes to a non existant address, the coin will therfore be lost forever.
