@@ -10,7 +10,6 @@ export interface TransactionInterface {
 	privateKey?: string;
 	toAddress: string;
 	amount: number;
-
 }
 
 class Transaction {
@@ -36,7 +35,8 @@ class Transaction {
 
 	/* before we let the transaction get added to a block:
 	 we need to sign it with the keys first */
-	signTransaction(signingKey: any) { // check this type in future
+	signTransaction(signingKey: any) {
+		// check this type in future
 		// singing key is the private key we sing with
 
 		// fist verify is the public key is the fromAddress, to only allow signing transactions that you own:

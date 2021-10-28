@@ -9,11 +9,13 @@ const ec = new EC("secp256k1");
 
 // sampling giving keys to the server and adding a transaction:
 let note = new Blockchain();
-const myKey = ec.keyFromPrivate('f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0'); // passing in the private key
-const myWalletAddress = myKey.getPublic('hex'); // mywalletaddress is my public key
+const myKey = ec.keyFromPrivate(
+	"f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0"
+); // passing in the private key
+const myWalletAddress = myKey.getPublic("hex"); // mywalletaddress is my public key
 
 // create sample transaction and sign it:
-let tx1 = new Transaction(myWalletAddress, 'paul', 100);
+let tx1 = new Transaction(myWalletAddress, "paul", 100);
 tx1.signTransaction(myKey);
 note.addTransaction(tx1);
 
@@ -29,7 +31,20 @@ console.log("\n");
 //------------------------------------------------------------------------------
 
 exports.mine = (req: Request, res: Response) => {
-	let minerAddress = req.params.minerAddress;
+
+	Blockchain.minePendingTransactionsClient(req.params.minerAddress: any, (err:any, data:any): any => {
+		if (err)
+			res.status(500).send({
+			success: "false",
+			message:
+			err.message || "The block hash you solved is not real/valid or whatever"
+		});
+		else res.send(data);
+	});
+
+
+	// let minerAddress = req.params.minerAddress;
+
 	res.status(200).send({
 		reward: 100,
 	});

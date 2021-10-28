@@ -8,6 +8,13 @@
 2. The website; where users will be able to login, generate a private key and purchase the crypto note. They will also be able to buy with their bank cards(will virtuall be implemented). The users will not need to login to see the price of the the Note as it will be on the homepage.
 3. The Mining tool(C++ application) which will let the user provide thier private key(generated through their website accounts).
 
+## How does the mining work?
+1. A client requests the block to be mined, the server delivers.
+2. The client solves the hash and sends another request to the server, this time with the solved hash as a param.
+3. The server gets the hash and compares it to its own hash that it too has been solving in the meantime. It gets the answer from the client and if they match, the block is added.
+- You might be wondering- what will happend if there are multipe clients trying to solve the hash = answer is - the first to send the hash is the winner. all the others will get a status 200 however with a 'sorry, did not mine' message, and so they will try again for the next block.
+- This means that the server application will always be running solving hashes as well(which is absolutely insane)... it is what it is.
+
 ## How does it all work? 
 - The users create an account and login, they then create a wallet where a public and private key will be generated for them through the website. The system will encrypt the private keys before storing it in the backend.
 - Users will also be able to virtually add their bank card and purchase crypto on the platform(website). Users will be able to send RandNote to other users via a public key. If the user sends Notes to a non existant address, the coin will therfore be lost forever.
