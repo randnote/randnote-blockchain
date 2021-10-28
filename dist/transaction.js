@@ -22,6 +22,7 @@ var Transaction = /** @class */ (function () {
     /* before we let the transaction get added to a block:
      we need to sign it with the keys first */
     Transaction.prototype.signTransaction = function (signingKey) {
+        // check this type in future
         // singing key is the private key we sing with
         // fist verify is the public key is the fromAddress, to only allow signing transactions that you own:
         if (signingKey.getPublic("hex") !== this.fromAddress) {

@@ -20,12 +20,12 @@ tx1.signTransaction(myKey);
 note.addTransaction(tx1);
 //
 let tx12 = new Transaction(myWalletAddress, "paul", 300);
-tx1.signTransaction(myKey);
+tx12.signTransaction(myKey);
 note.addTransaction(tx12);
 //
 let tx13 = new Transaction(myWalletAddress, "paul", 400);
-tx1.signTransaction(myKey);
-note.addTransaction(tx13);
+tx13.signTransaction(myKey);
+// note.addTransaction(tx13);
 //
 console.log("\nStarting the miner...");
 note.minePendingTransactions("paul");
@@ -39,7 +39,7 @@ console.log("\n");
 //------------------------------------------------------------------------------
 
 exports.mine = (req: Request, res: Response) => {
-	Blockchain.minePendingTransactionsClient(
+	note.minePendingTransactionsClient(
 		req.params.minerAddress,
 		req.params.minerSolution,
 		(err: any, data: any): any => {
@@ -56,9 +56,9 @@ exports.mine = (req: Request, res: Response) => {
 
 	// let minerAddress = req.params.minerAddress;
 
-	res.status(200).send({
-		reward: 100,
-	});
+	// res.status(200).send({
+	// 	reward: 100,
+	// });
 };
 
 exports.createTransaction = (req: Request, res: Response) => {

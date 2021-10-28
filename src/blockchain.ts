@@ -44,21 +44,21 @@ class Blockchain {
 	}
 
 	// method to send the block back to the user to start mining:
-	static minePendingTransactionsClient(
+	 minePendingTransactionsClient(
 		minerAddress: string,
 		minerSolution: any,
 		result: any
 	) {
 		/* if the client queries with an empty string or null for the minerSolution, then they just want the block to mine,
 		however if they send both minerAddress and the minerSolution, then they think they have a solution... */
-
-		if (!minerSolution.length || minerSolution == null) {
-			// only give them the block information
-			let block = new Block(
+		let block = new Block(
 				getTimeFormatted(),
-				this.pendingTransactions, // sending the first 4 transactions to with the block
+				this.pendingTransactions, 
 				this.getLatestBlock().hash
 			);
+		if (!minerSolution.length || minerSolution == null) {
+			// only give them the block information
+			
 			result(null, block, this.difficulty); // send the blockchain data back to the user, along with the difficulty...
 		}
 		// otherwise it means they have solved the problem... or so they think...
@@ -75,12 +75,12 @@ class Blockchain {
 			this.pendingTransactions = [
 				new Transaction(null, minerAddress, this.miningReward),
 			];
-			res.send(null, {
+			result(null, {
 				message: "success",
-				reward: this.miningReward
-			})
+				reward: this.miningReward,
+			});
 		} else {
-			result({ message: "wrong solution" }, null); // added error mesasge 
+			result({ message: "wrong solution" }, null); // added error mesasge
 		}
 	}
 

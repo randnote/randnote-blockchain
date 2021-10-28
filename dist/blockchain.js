@@ -19,7 +19,7 @@ var Blockchain = /** @class */ (function () {
     Blockchain.prototype.getLatestBlock = function () {
         return this.chain[this.chain.length - 1];
     };
-    Blockchain.prototype.minePendingTransactions = function (miningRewardAddress) {
+    Blockchain.prototype.minePendingTransactions = function (minerAddress) {
         /* make this function delay, till there are atleast 5 transactions,
         if still less, then dont send anything...*/
         var block = new block_1.default(time_1.default(), this.pendingTransactions, this.getLatestBlock().hash); // currently we are just mining all the transactions that are pending
@@ -28,8 +28,38 @@ var Blockchain = /** @class */ (function () {
         this.chain.push(block);
         // create a new transaction(a reward for the solver of the previous block)
         this.pendingTransactions = [
-            new transaction_1.default(null, miningRewardAddress, this.miningReward),
+            new transaction_1.default(null, minerAddress, this.miningReward),
         ];
+    };
+    // method to send the block back to the user to start mining:
+    Blockchain.prototype.minePendingTransactionsClient = function (minerAddress, minerSolution, result) {
+        /* if the client queries with an empty string or null for the minerSolution, then they just want the block to mine,
+        however if they send both minerAddress and the minerSolution, then they think they have a solution... */
+        var block = new block_1.default(time_1.default(), this.pendingTransactions, this.getLatestBlock().hash);
+        if (!minerSolution.length || minerSolution == null) {
+            // only give them the block information
+            result(null, block, this.difficulty); // send the blockchain data back to the user, along with the difficulty...
+        }
+        // otherwise it means they have solved the problem... or so they think...
+        // so we mine our own block and let them mine it as well and compare the results
+        var mymine = block.mineBlock(this.difficulty);
+        var yourmine = minerSolution;
+        if (mymine == yourmine) {
+            // success
+            this.chain.push(block);
+            console.log("Block successfully mined!");
+            this.chain.push(block);
+            this.pendingTransactions = [
+                new transaction_1.default(null, minerAddress, this.miningReward),
+            ];
+            result(null, {
+                message: "success",
+                reward: this.miningReward,
+            });
+        }
+        else {
+            result({ message: "wrong solution" }, null); // added error mesasge
+        }
     };
     Blockchain.prototype.addTransaction = function (transaction) {
         if (!transaction.fromAddress || !transaction.toAddress) {

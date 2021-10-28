@@ -11,7 +11,7 @@ module.exports = function (app) {
     /*How this will work, is that:
     1. the miner sends a request to mine a block,
     */
-    app.get("/mine/:minerAddress", Blockchain.mine);
+    app.get("/mine/:minerAddress/:minerSolution", Blockchain.mine);
     //posts
 };
 //# sourceMappingURL=index.js.map

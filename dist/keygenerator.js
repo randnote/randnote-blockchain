@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var elliptic_1 = __importDefault(require("elliptic"));
 var EC = elliptic_1.default.ec;
 var ec = new EC("secp256k1");
+// this is a testing key generation... already generated key: stored in testkeys.txt
 var key = ec.genKeyPair();
 var publicKey = key.getPublic("hex");
 var privateKey = key.getPrivate("hex");
