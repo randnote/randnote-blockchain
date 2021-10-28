@@ -18,7 +18,15 @@ const myWalletAddress = myKey.getPublic("hex"); // mywalletaddress is my public 
 let tx1 = new Transaction(myWalletAddress, "paul", 100);
 tx1.signTransaction(myKey);
 note.addTransaction(tx1);
-
+//
+let tx12 = new Transaction(myWalletAddress, "paul", 300);
+tx1.signTransaction(myKey);
+note.addTransaction(tx12);
+//
+let tx13 = new Transaction(myWalletAddress, "paul", 400);
+tx1.signTransaction(myKey);
+note.addTransaction(tx13);
+//
 console.log("\nStarting the miner...");
 note.minePendingTransactions("paul");
 console.log("\nBalance of paul is: " + note.getBalanceOfAddress("paul"));
@@ -36,13 +44,13 @@ exports.mine = (req: Request, res: Response) => {
 		req.params.minerSolution,
 		(err: any, data: any): any => {
 			if (err)
-				res.status(500).send({
+				res.status(200).send({
 					success: "false",
 					message:
 						err.message ||
 						"The block hash you solved is not real/valid or whatever",
 				});
-			else res.send(data);
+			else res.status(200).send(data);
 		}
 	);
 

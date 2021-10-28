@@ -23,11 +23,9 @@ class Blockchain {
 		return this.chain[this.chain.length - 1];
 	}
 
-	minePendingTransactions(miningRewardAddress: string) {
+	minePendingTransactions(minerAddress: string) {
 		/* make this function delay, till there are atleast 5 transactions,
 		if still less, then dont send anything...*/
-
-		
 
 		let block = new Block(
 			getTimeFormatted(),
@@ -41,21 +39,20 @@ class Blockchain {
 
 		// create a new transaction(a reward for the solver of the previous block)
 		this.pendingTransactions = [
-			new Transaction(null, miningRewardAddress, this.miningReward),
+			new Transaction(null, minerAddress, this.miningReward),
 		];
 	}
 
 	// method to send the block back to the user to start mining:
 	static minePendingTransactionsClient(
-		miningRewardAddress: string,
-		miningSolution: any,
+		minerAddress: string,
+		minerSolution: any,
 		result: any
 	) {
-		/* if the client queries with an empty string or null for the miningSolution, then they just want the block to mine,
-		however if they send both miningRewardAddress and the miningSolution, then they think they have a solution... */
+		/* if the client queries with an empty string or null for the minerSolution, then they just want the block to mine,
+		however if they send both minerAddress and the minerSolution, then they think they have a solution... */
 
-			
-		if (!miningSolution.length || miningSolution == null) {
+		if (!minerSolution.length || minerSolution == null) {
 			// only give them the block information
 			let block = new Block(
 				getTimeFormatted(),
@@ -67,20 +64,24 @@ class Blockchain {
 		// otherwise it means they have solved the problem... or so they think...
 		// so we mine our own block and let them mine it as well and compare the results
 		let mymine = block.mineBlock(this.difficulty);
-		let yourmine = miningSolution;
+		let yourmine = minerSolution;
 
-		if(mymine == yourmine){ // success
+		if (mymine == yourmine) {
+			// success
 			this.chain.push(block);
 			console.log("Block successfully mined!");
 			this.chain.push(block);
 
-
 			this.pendingTransactions = [
-				new Transaction(null, miningRewardAddress, this.miningReward),
+				new Transaction(null, minerAddress, this.miningReward),
 			];
-		}else{
-			  result({ result: "wrong solution" }, null);
-		}	
+			res.send(null, {
+				message: "success",
+				reward: this.miningReward
+			})
+		} else {
+			result({ message: "wrong solution" }, null); // added error mesasge 
+		}
 	}
 
 	addTransaction(transaction: any): void {
