@@ -11,7 +11,7 @@
     "dev": "tsc && cd ./dist && nodemon ./index.js",
     "build": "tsc",
     "prepare": "npm run build",
-    "prettier": "cd ./src && prettier --use-tabs --yab-width 4 --write ."
+    "prettier": "cd ./src && prettier --use-tabs --tab-width 4 --write ."
   },
   "pre-commit": [
     "prettier"
