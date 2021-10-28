@@ -19,7 +19,8 @@ var Block = /** @class */ (function () {
     };
     Block.prototype.mineBlock = function (difficulty) {
         console.log("Mining...");
-        while (this.hash.substring(0, difficulty) != Array(difficulty + 1).join("0")) {
+        while (this.hash.substring(0, difficulty) !=
+            Array(difficulty + 1).join("0")) {
             this.nonce++;
             this.hash = this.calculateHash();
         }

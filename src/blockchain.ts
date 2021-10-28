@@ -23,7 +23,7 @@ class Blockchain {
 		return this.chain[this.chain.length - 1];
 	}
 
-	minePendingTransactions(miningRewardAddress: any) {
+	minePendingTransactions(miningRewardAddress: string) {
 		/* make this function delay, till there are atleast 5 transactions,
 		if still less, then dont send anything...*/
 
@@ -43,11 +43,19 @@ class Blockchain {
 		];
 	}
 
-	createTransaction(transaction: any) {
+	addTransaction(transaction: any) : void{
+		if(!transaction.fromAddress || !transaction.toAddress){
+			throw new Error('Transaction must include from and to address');
+		}
+
+		if(!transaction.isValid()){
+			throw new Error("Cannot add invalid tranasaction to chain");
+		}
+
 		this.pendingTransactions.push(transaction);
 	}
 
-	getBalanceOfAddress(address: any) {
+	getBalanceOfAddress(address: string) : number{
 		let balance = 0;
 
 		for (const block of this.chain) {
@@ -63,11 +71,15 @@ class Blockchain {
 		return balance;
 	}
 
-	isChainValid() {
+	isChainValid() :boolean{
 		// traverse the entire blockchain and verify that the blocks are linked properly
 		for (let i = 1; i < this.chain.length; i++) {
 			const currentBlock = this.chain[i];
 			const previousBlock = this.chain[i - 1];
+
+			if(!currentBlock.hasValidTransactions()){
+				return false;
+			}
 
 			// confirms the hash of every block using its own data
 			if (currentBlock.hash !== currentBlock.calculateHash()) {

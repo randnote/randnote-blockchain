@@ -32,12 +32,22 @@ class Block {
 	mineBlock(difficulty: number) {
 		console.log("Mining...");
 		while (
-			this.hash.substring(0, difficulty) != Array(difficulty + 1).join("0")
+			this.hash.substring(0, difficulty) !=
+			Array(difficulty + 1).join("0")
 		) {
 			this.nonce++;
 			this.hash = this.calculateHash();
 		}
 		console.log("BLOCK MINED: " + this.hash); // just displays the hash string
+	}
+
+	hasValidTransactions(){
+		for(const tx of this.transactionss){
+			if(!tx.isValid()){
+				return false;
+			}
+		}
+		return true;
 	}
 }
 

@@ -6,6 +6,8 @@ const getBlockchain = () => {
 
 module.exports = (app: Application) => {
 	const Blockchain = require("../controllers/index");
+
+	//gets
 	app.get("/blockchain", getBlockchain);
 	app.get("/transactions", Blockchain.getAllTransactions);
 
@@ -13,4 +15,6 @@ module.exports = (app: Application) => {
 	1. the miner sends a request to mine a block, 
 	*/
 	app.get("/mine/:minerAddress", Blockchain.mine);
+
+	//posts
 };
