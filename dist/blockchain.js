@@ -36,29 +36,29 @@ var Blockchain = /** @class */ (function () {
         /* if the client queries with an empty string or null for the minerSolution, then they just want the block to mine,
         however if they send both minerAddress and the minerSolution, then they think they have a solution... */
         var block = new block_1.default(time_1.default(), this.pendingTransactions, this.getLatestBlock().hash);
-        if (!minerSolution.length || minerSolution == null) {
+        if (!minerSolution.length || minerSolution == 0) {
             // only give them the block information
-            result(null, block, this.difficulty); // send the blockchain data back to the user, along with the difficulty...
-        }
-        // otherwise it means they have solved the problem... or so they think...
-        // so we mine our own block and let them mine it as well and compare the results
-        var mymine = block.mineBlock(this.difficulty);
-        var yourmine = minerSolution;
-        if (mymine == yourmine) {
-            // success
-            this.chain.push(block);
-            console.log("Block successfully mined!");
-            this.chain.push(block);
-            this.pendingTransactions = [
-                new transaction_1.default(null, minerAddress, this.miningReward),
-            ];
-            result(null, {
-                message: "success",
-                reward: this.miningReward,
-            });
+            result(null, { "block": block, "difficulty": this.difficulty }); // send the blockchain data back to the user, along with the difficulty...
         }
         else {
-            result({ message: "wrong solution" }, null); // added error mesasge
+            var mymine = block.mineBlock(this.difficulty);
+            var yourmine = minerSolution;
+            if (mymine == yourmine) {
+                // success
+                this.chain.push(block);
+                console.log("Block successfully mined!");
+                this.chain.push(block);
+                this.pendingTransactions = [
+                    new transaction_1.default(null, minerAddress, this.miningReward),
+                ];
+                result(null, {
+                    message: "success",
+                    reward: this.miningReward,
+                });
+            }
+            else {
+                result({ message: "wrong solution" }, null); // added error mesasge
+            }
         }
     };
     Blockchain.prototype.addTransaction = function (transaction) {

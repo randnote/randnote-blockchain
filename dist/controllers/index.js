@@ -26,13 +26,13 @@ var tx13 = new transaction_1.default(myWalletAddress, "paul", 400);
 tx13.signTransaction(myKey);
 // note.addTransaction(tx13);
 //
-console.log("\nStarting the miner...");
-note.minePendingTransactions("paul");
-console.log("\nBalance of paul is: " + note.getBalanceOfAddress("paul"));
+// console.log("\nStarting the miner...");
+// note.minePendingTransactions("paul");
+// console.log("\nBalance of paul is: " + note.getBalanceOfAddress("paul"));
 //second mining:
-note.minePendingTransactions("jackie");
-console.log("Balance of paul is: " + note.getBalanceOfAddress("paul"));
-console.log("\n");
+// note.minePendingTransactions("jackie");
+// console.log("Balance of paul is: " + note.getBalanceOfAddress("paul"));
+// console.log("\n");
 // console.log(note.getAllTransactions());
 //------------------------------------------------------------------------------
 exports.mine = function (req, res) {

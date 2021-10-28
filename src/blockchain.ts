@@ -44,7 +44,7 @@ class Blockchain {
 	}
 
 	// method to send the block back to the user to start mining:
-	 minePendingTransactionsClient(
+	minePendingTransactionsClient(
 		minerAddress: string,
 		minerSolution: any,
 		result: any
@@ -52,35 +52,34 @@ class Blockchain {
 		/* if the client queries with an empty string or null for the minerSolution, then they just want the block to mine,
 		however if they send both minerAddress and the minerSolution, then they think they have a solution... */
 		let block = new Block(
-				getTimeFormatted(),
-				this.pendingTransactions, 
-				this.getLatestBlock().hash
-			);
-		if (!minerSolution.length || minerSolution == null) {
+			getTimeFormatted(),
+			this.pendingTransactions,
+			this.getLatestBlock().hash
+		);
+		if (!minerSolution.length || minerSolution == 0) {
 			// only give them the block information
-			
-			result(null, block, this.difficulty); // send the blockchain data back to the user, along with the difficulty...
-		}
-		// otherwise it means they have solved the problem... or so they think...
-		// so we mine our own block and let them mine it as well and compare the results
-		let mymine = block.mineBlock(this.difficulty);
-		let yourmine = minerSolution;
 
-		if (mymine == yourmine) {
-			// success
-			this.chain.push(block);
-			console.log("Block successfully mined!");
-			this.chain.push(block);
+			result(null, {"block": block, "difficulty": this.difficulty}); // send the blockchain data back to the user, along with the difficulty...
+		}else{
+			let mymine = block.mineBlock(this.difficulty);
+			let yourmine = minerSolution;
 
-			this.pendingTransactions = [
-				new Transaction(null, minerAddress, this.miningReward),
-			];
-			result(null, {
-				message: "success",
-				reward: this.miningReward,
-			});
-		} else {
-			result({ message: "wrong solution" }, null); // added error mesasge
+			if (mymine == yourmine) {
+				// success
+				this.chain.push(block);
+				console.log("Block successfully mined!");
+				this.chain.push(block);
+
+				this.pendingTransactions = [
+					new Transaction(null, minerAddress, this.miningReward),
+				];
+				result(null, {
+					message: "success",
+					reward: this.miningReward,
+				});
+			} else {
+				result({ message: "wrong solution" }, null); // added error mesasge
+			}
 		}
 	}
 

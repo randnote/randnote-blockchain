@@ -8,7 +8,7 @@ module.exports = (app: Application) => {
 	const Blockchain = require("../controllers/index");
 
 	//gets
-	app.get("/blockchain", getBlockchain);
+	app.get("/blockchain", getBlockchain); // brocken
 	app.get("/transactions", Blockchain.getAllTransactions);
 
 	/*How this will work, is that:
