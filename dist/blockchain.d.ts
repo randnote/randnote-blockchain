@@ -1,4 +1,4 @@
-import Block from './block';
+import Block from "./block";
 declare class Blockchain {
     chain: any;
     difficulty: any;

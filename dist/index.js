@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
-var level = require('level');
+var level = require("level");
 var cors = require("cors");
 var bodyParser = require("body-parser");
 var app = express_1.default();

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var SHA256 = require('crypto-js/sha256');
+var SHA256 = require("crypto-js/sha256");
 var Block = /** @class */ (function () {
     function Block(timestamp, transactions, previousHash) {
         this.timestamp = timestamp;
@@ -18,7 +18,7 @@ var Block = /** @class */ (function () {
             this.nonce).toString();
     };
     Block.prototype.mineBlock = function (difficulty) {
-        console.log('Mining...');
+        console.log("Mining...");
         while (this.hash.substring(0, difficulty) != Array(difficulty + 1).join("0")) {
             this.nonce++;
             this.hash = this.calculateHash();

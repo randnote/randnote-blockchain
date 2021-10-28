@@ -28,7 +28,7 @@ var Blockchain = /** @class */ (function () {
         this.chain.push(block);
         // create a new transaction(a reward for the solver of the previous block)
         this.pendingTransactions = [
-            new transaction_1.default(null, miningRewardAddress, this.miningReward)
+            new transaction_1.default(null, miningRewardAddress, this.miningReward),
         ];
     };
     Blockchain.prototype.createTransaction = function (transaction) {
