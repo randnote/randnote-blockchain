@@ -31,17 +31,19 @@ console.log("\n");
 //------------------------------------------------------------------------------
 
 exports.mine = (req: Request, res: Response) => {
-
-	Blockchain.minePendingTransactionsClient(req.params.minerAddress: any, (err:any, data:any): any => {
-		if (err)
-			res.status(500).send({
-			success: "false",
-			message:
-			err.message || "The block hash you solved is not real/valid or whatever"
-		});
-		else res.send(data);
-	});
-
+	Blockchain.minePendingTransactionsClient(
+		req.params.minerAddress,
+		(err: any, data: any): any => {
+			if (err)
+				res.status(500).send({
+					success: "false",
+					message:
+						err.message ||
+						"The block hash you solved is not real/valid or whatever",
+				});
+			else res.send(data);
+		}
+	);
 
 	// let minerAddress = req.params.minerAddress;
 

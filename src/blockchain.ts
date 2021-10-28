@@ -44,23 +44,25 @@ class Blockchain {
 	}
 
 	// method to send the block back to the user to start mining:
-	static minePendingTransactionsClient(miningRewardAddress: string, miningSolution: any ,result: any) {
+	static minePendingTransactionsClient(
+		miningRewardAddress: string,
+		miningSolution: any,
+		result: any
+	) {
 		/* if the client queries with an empty string or null for the miningSolution, then they just want the block to mine,
 		however if they send both miningRewardAddress and the miningSolution, then they think they have a solution... */
 
-		if(!miningSolution.length || miningSolution == null){
+		if (!miningSolution.length || miningSolution == null) {
 			// only give them the block information
 			let block = new Block(
 				getTimeFormatted(),
 				this.pendingTransactions,
 				this.getLatestBlock().hash
-			); 
+			);
 			result(null, block, this.difficulty); // send the blockchain data back to the user, along with the difficulty...
 		}
 		// otherwise it means they have solved the problem... or so they think...
 		//// code here to check...
-
-		
 
 		console.log("Block successfully mined!");
 		this.chain.push(block);
