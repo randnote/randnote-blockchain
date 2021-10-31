@@ -11,10 +11,9 @@ var Block = /** @class */ (function () {
     }
     // calc the hash func of the block... creates the hash for our block
     Block.prototype.calculateHash = function () {
-        return SHA256(this.index +
+        return SHA256(this.timestamp +
             this.previousHash +
-            this.timestamp +
-            JSON.stringify(this.data) +
+            JSON.stringify(this.transactions) +
             this.nonce).toString();
     };
     Block.prototype.mineBlock = function (difficulty) {

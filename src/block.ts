@@ -1,7 +1,6 @@
 const SHA256 = require("crypto-js/sha256");
 import getTimeFormatted from "./time";
 class Block {
-	index: any;
 	block: any;
 	timestamp: any;
 	transactions: any;
@@ -38,7 +37,6 @@ class Block {
 		}
 		console.log("BLOCK MINED: " + this.hash); // just displays the hash string
 	}
-
 
 	hasValidTransactions() {
 		for (const tx of this.transactions) {

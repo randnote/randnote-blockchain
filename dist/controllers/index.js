@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.note = void 0;
 var blockchain_1 = __importDefault(require("../blockchain"));
 var transaction_1 = __importDefault(require("../transaction"));
 // imports for testing purposes:
@@ -11,6 +12,7 @@ var EC = elliptic_1.default.ec;
 var ec = new EC("secp256k1");
 // sampling giving keys to the server and adding a transaction:
 var note = new blockchain_1.default();
+exports.note = note;
 var myKey = ec.keyFromPrivate("f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0"); // passing in the private key
 var myWalletAddress = myKey.getPublic("hex"); // mywalletaddress is my public key
 // create sample transaction and sign it:

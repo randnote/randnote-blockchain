@@ -1,7 +1,5 @@
 declare class Block {
-    index: any;
     block: any;
-    data: any;
     timestamp: any;
     transactions: any;
     previousHash: any;

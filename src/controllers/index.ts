@@ -25,6 +25,9 @@ note.addTransaction(tx12);
 //
 let tx13 = new Transaction(myWalletAddress, "paul", 400);
 tx13.signTransaction(myKey);
+
+
+export {note} // for the testblock page
 // note.addTransaction(tx13);
 //
 // console.log("\nStarting the miner...");
