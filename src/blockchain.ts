@@ -63,8 +63,8 @@ class Blockchain {
 		} else {
 			let mymine = await block.mineBlock(this.difficulty);
 			let yourmine = minerSolution;
-			console.log('minersolution: ',yourmine);
-			console.log('server solution: ', mymine);
+			console.log("minersolution: ", yourmine);
+			console.log("server solution: ", mymine);
 
 			if (mymine == yourmine) {
 				// success
