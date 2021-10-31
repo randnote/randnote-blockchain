@@ -38,7 +38,7 @@ var Blockchain = /** @class */ (function () {
         var block = new block_1.default(time_1.default(), this.pendingTransactions, this.getLatestBlock().hash);
         if (!minerSolution.length || minerSolution == 0) {
             // only give them the block information
-            result(null, { "block": block, "difficulty": this.difficulty }); // send the blockchain data back to the user, along with the difficulty...
+            result(null, { block: block, difficulty: this.difficulty }); // send the blockchain data back to the user, along with the difficulty...
         }
         else {
             var mymine = block.mineBlock(this.difficulty);

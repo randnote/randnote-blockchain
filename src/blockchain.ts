@@ -59,8 +59,8 @@ class Blockchain {
 		if (!minerSolution.length || minerSolution == 0) {
 			// only give them the block information
 
-			result(null, {"block": block, "difficulty": this.difficulty}); // send the blockchain data back to the user, along with the difficulty...
-		}else{
+			result(null, { block: block, difficulty: this.difficulty }); // send the blockchain data back to the user, along with the difficulty...
+		} else {
 			let mymine = block.mineBlock(this.difficulty);
 			let yourmine = minerSolution;
 

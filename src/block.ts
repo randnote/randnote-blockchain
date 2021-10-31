@@ -3,7 +3,6 @@ import getTimeFormatted from "./time";
 class Block {
 	index: any;
 	block: any;
-	data: any;
 	timestamp: any;
 	transactions: any;
 	previousHash: any;
@@ -21,10 +20,9 @@ class Block {
 	// calc the hash func of the block... creates the hash for our block
 	calculateHash() {
 		return SHA256(
-			this.index +
+			this.timestamp +
 				this.previousHash +
-				this.timestamp +
-				JSON.stringify(this.data) +
+				JSON.stringify(this.transactions) +
 				this.nonce
 		).toString();
 	}
@@ -40,6 +38,7 @@ class Block {
 		}
 		console.log("BLOCK MINED: " + this.hash); // just displays the hash string
 	}
+
 
 	hasValidTransactions() {
 		for (const tx of this.transactions) {
