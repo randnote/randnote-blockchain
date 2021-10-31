@@ -424,6 +424,11 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
 
+jackscript-js@^1.0.1-Alpha:
+  version "1.0.1-Alpha"
+  resolved "https://registry.yarnpkg.com/jackscript-js/-/jackscript-js-1.0.1-Alpha.tgz#7a0e62aeff0fd89173be850c1d53f91262baa363"
+  integrity sha512-wEncwBcrUhD9fnEokzd2g0/S6MY0bxl0i++qaynVSpxq3x5jFKQwyYalYv10KooBMEyxQfQ1lqIMmNet1wNevg==
+
 level-codec@^10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/level-codec/-/level-codec-10.0.0.tgz#f9e892770532c6cdcc83529546730791b0c62c12"

@@ -24,6 +24,7 @@
     "crypto-js": "^4.0.0",
     "elliptic": "^6.5.4",
     "express": "^4.17.1",
+    "jackscript-js": "^1.0.1-Alpha",
     "level": "^7.0.1",
     "moment": "^2.29.1",
     "pre-commit": "^1.2.2",
