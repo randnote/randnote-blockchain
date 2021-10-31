@@ -43,32 +43,46 @@ var axios_1 = __importDefault(require("axios"));
 var SHA256 = require("crypto-js/sha256");
 var controllers_1 = require("./controllers");
 // axios to get the blockchain
-var getBlock = function () {
-    axios_1.default.get("http://localhost:8033/mine/0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3/0").then(function (response) {
-        console.log(response.data);
-        var block = response.data.block;
-        return block;
-    });
-};
+// const getBlock = () => {
+// 	Axios.get(
+// 		`http://localhost:8033/mine/0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3/0`
+// 	).then( async(response: any) => {
+// 		// console.log(response.data);
+// 		let block = await response.data.block;
+// 		return block;
+// 	});
+// };
 var calculateHash = function (timestamp, previousHash, transactions, nonce) {
-    return SHA256(timestamp +
-        previousHash +
-        JSON.stringify(transactions) +
-        nonce).toString();
+    return SHA256(timestamp + previousHash + JSON.stringify(transactions) + nonce).toString();
 };
 var mineBlock = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var difficulty, block;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                difficulty = 2;
-                return [4 /*yield*/, getBlock()];
-            case 1:
-                block = _a.sent();
-                console.log(block);
-                console.log("---");
-                return [2 /*return*/];
-        }
+        // first get the block:
+        axios_1.default.get("http://localhost:8033/mine/0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3/0").then(function (response) { return __awaiter(void 0, void 0, void 0, function () {
+            var block, difficulty, hash;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, response.data.block];
+                    case 1:
+                        block = _a.sent();
+                        difficulty = 2;
+                        console.log(block);
+                        console.log("---");
+                        return [4 /*yield*/, calculateHash(block.timestamp, block.previousHash, block.transactions, block.nonce)];
+                    case 2:
+                        hash = _a.sent();
+                        console.log("Mining...");
+                        while (hash.substring(0, difficulty) != Array(difficulty + 1).join("0")) {
+                            block['nonce']++;
+                            hash = calculateHash(block.timestamp, block.previousHash, block.transactions, block.nonce);
+                            ;
+                        }
+                        console.log("BLOCK MINED: " + block['hash']); // just displays the hash string
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        return [2 /*return*/];
     });
 }); };
 // send the solution:
