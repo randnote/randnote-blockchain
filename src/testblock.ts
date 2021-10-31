@@ -60,19 +60,16 @@ const mineBlock = async () => {
 		console.log("BLOCK MINED: " + block["hash"]); // just displays the hash string
 
 		// now send to the server:
-		Axios.get(`http://localhost:8033/mine/0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3/${hash}`)
-        .then( (response: any)=>{
-            console.log(response.data);
-
-        });
+		Axios.get(
+			`http://localhost:8033/mine/0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3/${hash}`
+		).then((response: any) => {
+			console.log(response.data);
+		});
 	});
 };
 
-
 // console.log("hello");
 mineBlock();
-
-
 
 // test by looking at the new blockchain
 console.log(note.chain);

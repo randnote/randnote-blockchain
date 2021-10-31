@@ -44,7 +44,7 @@ class Blockchain {
 	}
 
 	// method to send the block back to the user to start mining:
-	minePendingTransactionsClient(
+	async minePendingTransactionsClient(
 		minerAddress: string,
 		minerSolution: any,
 		result: any
@@ -61,8 +61,10 @@ class Blockchain {
 
 			result(null, { block: block, difficulty: this.difficulty }); // send the blockchain data back to the user, along with the difficulty...
 		} else {
-			let mymine = block.mineBlock(this.difficulty);
+			let mymine = await block.mineBlock(this.difficulty);
 			let yourmine = minerSolution;
+			console.log('minersolution: ',yourmine);
+			console.log('server solution: ', mymine);
 
 			if (mymine == yourmine) {
 				// success

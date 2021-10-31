@@ -7,7 +7,7 @@ declare class Block {
     nonce: any;
     constructor(timestamp: any, transactions: any, previousHash: string);
     calculateHash(): any;
-    mineBlock(difficulty: number): void;
+    mineBlock(difficulty: number): any;
     hasValidTransactions(): boolean;
 }
 export default Block;

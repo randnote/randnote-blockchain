@@ -24,6 +24,7 @@ var Block = /** @class */ (function () {
             this.hash = this.calculateHash();
         }
         console.log("BLOCK MINED: " + this.hash); // just displays the hash string
+        return this.hash;
     };
     Block.prototype.hasValidTransactions = function () {
         for (var _i = 0, _a = this.transactions; _i < _a.length; _i++) {
