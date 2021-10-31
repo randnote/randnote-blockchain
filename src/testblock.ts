@@ -30,7 +30,7 @@ const mineBlock = async () => {
 	// first get the block:
 	Axios.get(
 		`http://localhost:8033/mine/0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3/0`
-	).then( async(response: any) => {
+	).then(async (response: any) => {
 		// console.log(response.data);
 		let block = await response.data.block;
 
@@ -39,32 +39,40 @@ const mineBlock = async () => {
 		console.log(block);
 		console.log("---");
 
-		let hash = await calculateHash(block.timestamp, block.previousHash, block.transactions, block.nonce);
+		let hash = await calculateHash(
+			block.timestamp,
+			block.previousHash,
+			block.transactions,
+			block.nonce
+		);
 		console.log("Mining...");
 		while (
 			hash.substring(0, difficulty) != Array(difficulty + 1).join("0")
 		) {
-			block['nonce']++;
-			hash = calculateHash(block.timestamp, block.previousHash, block.transactions, block.nonce);;
+			block["nonce"]++;
+			hash = calculateHash(
+				block.timestamp,
+				block.previousHash,
+				block.transactions,
+				block.nonce
+			);
 		}
-		console.log("BLOCK MINED: " + block['hash']); // just displays the hash string
-		
+		console.log("BLOCK MINED: " + block["hash"]); // just displays the hash string
+
+		// now send to the server:
+		Axios.get(`http://localhost:8033/mine/0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3/${hash}`)
+        .then( (response: any)=>{
+            console.log(response.data);
+
+        });
 	});
 };
 
-// send the solution:
-// const mineBlockchain = () = async =>{
-//     await Axios.get(`http://localhost:8033/mine/0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3/0`)
-//         .then( (response: any)=>{
-//             console.log(response.data);
-
-//             // mine the block
-//         }
-//     )
-// }
 
 // console.log("hello");
 mineBlock();
+
+
 
 // test by looking at the new blockchain
 console.log(note.chain);
