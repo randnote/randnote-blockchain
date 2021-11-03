@@ -83,8 +83,8 @@ var Blockchain = /** @class */ (function () {
                     case 2:
                         mymine = _a.sent();
                         yourmine = minerSolution;
-                        console.log('minersolution: ', yourmine);
-                        console.log('server solution: ', mymine);
+                        console.log("minersolution: ", yourmine);
+                        console.log("server solution: ", mymine);
                         if (mymine == yourmine) {
                             // success
                             this.chain.push(block);
