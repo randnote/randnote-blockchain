@@ -97,9 +97,23 @@ class Blockchain {
 		this.pendingTransactions.push(transaction);
 	}
 
+	// The add transaction functinon for requests that come from the client:
+	addTransactionClient(transaction: any): void {
+		if (!transaction.fromAddress || !transaction.toAddress) {
+			throw new Error("Transaction must include from and to address");
+		}
+
+		if (!transaction.isValid()) {
+			result({ message: "Cannot add invalid transactions to the chain" }, null);
+		}
+
+		this.pendingTransactions.push(transaction);
+		result(null, {success: true, message: `Transaction: ${transaction} has been added to the pendingTransactions`})
+	}
+
+
 	getBalanceOfAddress(address: string): number {
 		let balance = 0;
-
 		for (const block of this.chain) {
 			for (const trans of block.transactions) {
 				if (address === trans.fromAddress) {

@@ -8,7 +8,7 @@ const EC = Elliptic.ec;
 const ec = new EC("secp256k1");
 
 // sampling giving keys to the server and adding a transaction:
-let note = new Blockchain();
+const note = new Blockchain();
 const myKey = ec.keyFromPrivate(
 	"f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0"
 ); // passing in the private key
