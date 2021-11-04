@@ -60,12 +60,21 @@ exports.createTransaction = function (req, res) {
         });
         console.log("empty");
     }
-    var newTransaction = {
-        fromAddress: req.body.fromAddress,
-        privateKey: req.body.privatekey,
-        toAddress: req.body.toAddress,
-        amount: req.body.amount,
-    };
+    // let amount = req.body.amount;
+    var fromAddress = req.body.fromAddress;
+    var toAddress = req.body.toAddress;
+    var amount = req.body.amount;
+    var newTransaction = new transaction_1.default(fromAddress, toAddress, amount);
+    console.log(newTransaction);
+    // let transaction = new Transaction(newTransaction.fromAddress, "paul", 100);
+    // transaction.signTransaction(newTransaction.privateKey);
+    // note.addTransactionClient(transaction, (err: Error, data: object) => {
+    // 	if(err){
+    // 		console.log("the blockchain gave us an error: ", err)
+    // 	}else{
+    // 		console.log(data)
+    // 	}
+    // });
     // transaction may be accepted or refused, after validation is completed
     // make validation here:
     res.status(200).send({

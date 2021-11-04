@@ -5,10 +5,11 @@ var getBlockchain = function () {
 };
 module.exports = function (app) {
     var Blockchain = require("../controllers/index");
-    //gets
+    // gets
     app.get("/blockchain", getBlockchain); // brocken
     app.get("/transactions", Blockchain.getAllTransactions);
     app.get("/mine/:minerAddress/:minerSolution", Blockchain.mine);
-    //posts
+    // posts
+    app.post("/transaction", Blockchain.createTransaction);
 };
 //# sourceMappingURL=index.js.map

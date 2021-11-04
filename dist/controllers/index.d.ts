@@ -1,3 +1,3 @@
 import Blockchain from "../blockchain";
-declare let note: Blockchain;
+declare const note: Blockchain;
 export { note };

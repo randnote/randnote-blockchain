@@ -71,12 +71,25 @@ exports.createTransaction = (req: Request, res: Response) => {
 		console.log("empty");
 	}
 
-	const newTransaction: TransactionInterface = {
-		fromAddress: req.body.fromAddress,
-		privateKey: req.body.privatekey,
-		toAddress: req.body.toAddress,
-		amount: req.body.amount,
-	};
+	// let amount = req.body.amount;
+	let fromAddress=req.body.fromAddress;
+		let toAddress=req.body.toAddress;
+		let amount=req.body.amount;
+
+	 let newTransaction = new Transaction (
+		fromAddress, toAddress, amount
+	);
+	console.log(newTransaction)
+
+	// let transaction = new Transaction(newTransaction.fromAddress, "paul", 100);
+	// transaction.signTransaction(newTransaction.privateKey);
+	// note.addTransactionClient(transaction, (err: Error, data: object) => {
+	// 	if(err){
+	// 		console.log("the blockchain gave us an error: ", err)
+	// 	}else{
+	// 		console.log(data)
+	// 	}
+	// });
 
 	// transaction may be accepted or refused, after validation is completed
 	// make validation here:

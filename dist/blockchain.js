@@ -116,6 +116,20 @@ var Blockchain = /** @class */ (function () {
         }
         this.pendingTransactions.push(transaction);
     };
+    // The add transaction functinon for requests that come from the client:
+    Blockchain.prototype.addTransactionClient = function (transaction, result) {
+        if (!transaction.fromAddress || !transaction.toAddress) {
+            throw new Error("Transaction must include from and to address");
+        }
+        if (!transaction.isValid()) {
+            result({ message: "Cannot add invalid transactions to the chain" }, null);
+        }
+        this.pendingTransactions.push(transaction);
+        result(null, {
+            success: true,
+            message: "Transaction: " + transaction + " has been added to the pendingTransactions",
+        });
+    };
     Blockchain.prototype.getBalanceOfAddress = function (address) {
         var balance = 0;
         for (var _i = 0, _a = this.chain; _i < _a.length; _i++) {

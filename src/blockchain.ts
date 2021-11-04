@@ -1,3 +1,5 @@
+import express, { Application, Request, Response, NextFunction } from "express";
+
 import Transaction from "./transaction";
 import Block from "./block";
 import getTimeFormatted from "./time";
@@ -98,7 +100,7 @@ class Blockchain {
 	}
 
 	// The add transaction functinon for requests that come from the client:
-	addTransactionClient(transaction: any): void {
+	addTransactionClient(transaction: any, result: any): void {
 		if (!transaction.fromAddress || !transaction.toAddress) {
 			throw new Error("Transaction must include from and to address");
 		}
@@ -108,9 +110,11 @@ class Blockchain {
 		}
 
 		this.pendingTransactions.push(transaction);
-		result(null, {success: true, message: `Transaction: ${transaction} has been added to the pendingTransactions`})
+		result(null, {
+			success: true,
+			message: `Transaction: ${transaction} has been added to the pendingTransactions`,
+		});
 	}
-
 
 	getBalanceOfAddress(address: string): number {
 		let balance = 0;

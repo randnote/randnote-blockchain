@@ -10,6 +10,7 @@ declare class Blockchain {
     minePendingTransactions(minerAddress: string): void;
     minePendingTransactionsClient(minerAddress: string, minerSolution: any, result: any): Promise<void>;
     addTransaction(transaction: any): void;
+    addTransactionClient(transaction: any, result: any): void;
     getBalanceOfAddress(address: string): number;
     isChainValid(): boolean;
     getAllTransactions(): any;
