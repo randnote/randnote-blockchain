@@ -71,7 +71,7 @@ class Blockchain {
 			if (mymine == yourmine) {
 				// success
 				this.chain.push(block);
-				console.log("Block successfully mined!");
+				// console.log("Block successfully mined!");
 				this.chain.push(block);
 
 				this.pendingTransactions = [
@@ -106,7 +106,10 @@ class Blockchain {
 		}
 
 		if (!transaction.isValid()) {
-			result({ message: "Cannot add invalid transactions to the chain" }, null);
+			result(
+				{ message: "Cannot add invalid transactions to the chain" },
+				null
+			);
 		}
 
 		this.pendingTransactions.push(transaction);

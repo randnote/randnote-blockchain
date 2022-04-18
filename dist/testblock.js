@@ -41,7 +41,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
 var SHA256 = require("crypto-js/sha256");
-var controllers_1 = require("./controllers");
 var calculateHash = function (timestamp, previousHash, transactions, nonce) {
     return SHA256(timestamp + previousHash + JSON.stringify(transactions) + nonce).toString();
 };
@@ -81,5 +80,5 @@ var mineBlock = function () { return __awaiter(void 0, void 0, void 0, function 
 // console.log("hello");
 mineBlock();
 // test by looking at the new blockchain
-console.log(controllers_1.note.chain);
+// console.log(note.chain);
 //# sourceMappingURL=testblock.js.map

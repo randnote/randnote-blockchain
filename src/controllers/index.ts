@@ -25,12 +25,15 @@ note.addTransaction(tx12);
 //
 let tx13 = new Transaction(myWalletAddress, "paul", 400);
 tx13.signTransaction(myKey);
+note.addTransaction(tx13);
 
 export { note }; // for the testblock page
-// note.addTransaction(tx13);
+
+
+
 //
-// console.log("\nStarting the miner...");
-// note.minePendingTransactions("paul");
+console.log("\nStarting the miner...");
+note.minePendingTransactions("paul");
 // console.log("\nBalance of paul is: " + note.getBalanceOfAddress("paul"));
 
 //second mining:
@@ -72,14 +75,12 @@ exports.createTransaction = (req: Request, res: Response) => {
 	}
 
 	// let amount = req.body.amount;
-	let fromAddress=req.body.fromAddress;
-		let toAddress=req.body.toAddress;
-		let amount=req.body.amount;
+	let fromAddress = req.body.fromAddress;
+	let toAddress = req.body.toAddress;
+	let amount = req.body.amount;
 
-	 let newTransaction = new Transaction (
-		fromAddress, toAddress, amount
-	);
-	console.log(newTransaction)
+	let newTransaction = new Transaction(fromAddress, toAddress, amount);
+	console.log("___"+newTransaction);
 
 	// let transaction = new Transaction(newTransaction.fromAddress, "paul", 100);
 	// transaction.signTransaction(newTransaction.privateKey);

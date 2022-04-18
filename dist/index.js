@@ -27,7 +27,6 @@ app.use(cors({
         return callback(null, true);
     },
 }));
-require("./database/index");
 require("./routes/index")(app);
 app.listen(8033, function () { return console.log("server started on port 8033"); });
 //# sourceMappingURL=index.js.map

@@ -26,10 +26,10 @@ note.addTransaction(tx12);
 //
 var tx13 = new transaction_1.default(myWalletAddress, "paul", 400);
 tx13.signTransaction(myKey);
-// note.addTransaction(tx13);
+note.addTransaction(tx13);
 //
-// console.log("\nStarting the miner...");
-// note.minePendingTransactions("paul");
+console.log("\nStarting the miner...");
+note.minePendingTransactions("paul");
 // console.log("\nBalance of paul is: " + note.getBalanceOfAddress("paul"));
 //second mining:
 // note.minePendingTransactions("jackie");
@@ -65,7 +65,7 @@ exports.createTransaction = function (req, res) {
     var toAddress = req.body.toAddress;
     var amount = req.body.amount;
     var newTransaction = new transaction_1.default(fromAddress, toAddress, amount);
-    console.log(newTransaction);
+    console.log("___" + newTransaction);
     // let transaction = new Transaction(newTransaction.fromAddress, "paul", 100);
     // transaction.signTransaction(newTransaction.privateKey);
     // note.addTransactionClient(transaction, (err: Error, data: object) => {
