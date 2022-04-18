@@ -32,6 +32,5 @@ app.use(
 	})
 );
 
-require("./database/index");
 require("./routes/index")(app);
 app.listen(8033, () => console.log(`server started on port 8033`));
