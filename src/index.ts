@@ -4,7 +4,7 @@ const level = require("level");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const app: Application = express();
-app.use(express.urlencoded())
+app.use(express.urlencoded());
 app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
 
