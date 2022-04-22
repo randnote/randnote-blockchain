@@ -4,9 +4,9 @@ const level = require("level");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const app: Application = express();
-
-app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded())
+app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
 
 var allowedOrigins = ["http://localhost:3000", "http://locahost:3000/admin"];
 app.use(

@@ -64,7 +64,7 @@ exports.mine = (req: Request, res: Response) => {
 	// });
 };
 
-exports.createTransaction = (req: Request, res: Response) => {
+exports.createTransaction = ((req: Request, res: Response) => {
 	if (!req.body) {
 		res.status(400).send({
 			message: "Content can not be empty!",
@@ -94,7 +94,7 @@ exports.createTransaction = (req: Request, res: Response) => {
 	res.status(200).send({
 		message: `Transaction from address: this, to address: this, was successful`,
 	});
-};
+});
 
 exports.getAddressBalance = (req: Request, res: Response) => {
 	let address = req.params.address;

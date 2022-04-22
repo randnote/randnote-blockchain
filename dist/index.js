@@ -8,8 +8,9 @@ var level = require("level");
 var cors = require("cors");
 var bodyParser = require("body-parser");
 var app = (0, express_1.default)();
-app.use(bodyParser.json());
-app.use(express_1.default.urlencoded({ extended: false }));
+app.use(express_1.default.urlencoded());
+app.use(express_1.default.json());
+// app.use(express.urlencoded({ extended: false }));
 var allowedOrigins = ["http://localhost:3000", "http://locahost:3000/admin"];
 app.use(cors({
     origin: function (origin, callback) {
