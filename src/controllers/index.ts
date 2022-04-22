@@ -71,25 +71,24 @@ exports.createTransaction = (req: Request, res: Response) => {
 		});
 		console.log("empty");
 	}
-	console.log(req.body.fromAddress);
-	// let amount = req.body.amount;
-	// let fromAddress = req.body.fromAddress;
-	// let fromAddressPrivateKey = req.body.fromAddressPrivateKey; // havent mad this yet...
-	// let toAddress = req.body.toAddress;
-	// let amount = req.body.amount;
+	// console.log(req.body.fromAddress);
+	let amount = req.body.amount;
+	let fromAddress = req.body.fromAddress;
+	let fromAddressPrivateKey = req.body.fromAddressPrivateKey; // havent mad this yet...
+	let toAddress = req.body.toAddress;
 
-	// let newTransaction = new Transaction(fromAddress, toAddress, amount);
-	// console.log("___"+newTransaction);
+	let newTransaction = new Transaction(fromAddress, toAddress, amount);
+	console.log("___"+newTransaction);
 
-	// newTransaction.signTransaction(fromAddressPrivateKey);
-	// // note.addTransaction(newTransaction); // instead of this, i need to add it to the signTransactionCLient
-	// note.addTransactionClient(newTransaction, (err: Error, data: object) => {
-	// 	if(err){
-	// 		console.log("the blockchain gave us an error: ", err)
-	// 	}else{
-	// 		console.log(data)
-	// 	}
-	// });
+	newTransaction.signTransaction(fromAddressPrivateKey);
+	// note.addTransaction(newTransaction); // instead of this, i need to add it to the signTransactionCLient
+	note.addTransactionClient(newTransaction, (err: Error, data: object) => {
+		if(err){
+			console.log("the blockchain gave us an error: ", err)
+		}else{
+			console.log(data)
+		}
+	});
 
 	res.status(200).send({
 		message: `Transaction from address: this, to address: this, was successful`,
