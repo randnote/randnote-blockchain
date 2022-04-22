@@ -37,3 +37,14 @@
 ## Extras
 - This is an Open source project. Any new ideas and additions are always welcome.
 - This project should never be turned into a real platform that accepts real money as it is not stable and has alot of security risks.
+
+### Application test keys:
+Test the application with these json reqs:
+```json
+{
+    "fromAddress": "f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0",
+    "fromAddressPrivateKey": "0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3",
+    "toAddress": "12",
+    "amount": 10
+}
+```

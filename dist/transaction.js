@@ -10,7 +10,7 @@ var EC = elliptic_1.default.ec;
 var ec = new EC("secp256k1");
 var Transaction = /** @class */ (function () {
     function Transaction(fromAddress, toAddress, amount) {
-        this.timestamp = time_1.default();
+        this.timestamp = (0, time_1.default)();
         this.fromAddress = fromAddress;
         this.toAddress = toAddress;
         this.amount = amount;

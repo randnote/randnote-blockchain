@@ -53,34 +53,34 @@ exports.mine = function (req, res) {
     // 	reward: 100,
     // });
 };
-exports.createTransaction = function (req, res) {
+exports.createTransaction = (function (req, res) {
     if (!req.body) {
         res.status(400).send({
             message: "Content can not be empty!",
         });
         console.log("empty");
     }
+    console.log(req.body.fromAddress);
     // let amount = req.body.amount;
-    var fromAddress = req.body.fromAddress;
-    var toAddress = req.body.toAddress;
-    var amount = req.body.amount;
-    var newTransaction = new transaction_1.default(fromAddress, toAddress, amount);
-    console.log("___" + newTransaction);
-    // let transaction = new Transaction(newTransaction.fromAddress, "paul", 100);
-    // transaction.signTransaction(newTransaction.privateKey);
-    // note.addTransactionClient(transaction, (err: Error, data: object) => {
+    // let fromAddress = req.body.fromAddress;
+    // let fromAddressPrivateKey = req.body.fromAddressPrivateKey; // havent mad this yet...
+    // let toAddress = req.body.toAddress;
+    // let amount = req.body.amount;
+    // let newTransaction = new Transaction(fromAddress, toAddress, amount);
+    // console.log("___"+newTransaction);
+    // newTransaction.signTransaction(fromAddressPrivateKey);
+    // // note.addTransaction(newTransaction); // instead of this, i need to add it to the signTransactionCLient
+    // note.addTransactionClient(newTransaction, (err: Error, data: object) => {
     // 	if(err){
     // 		console.log("the blockchain gave us an error: ", err)
     // 	}else{
     // 		console.log(data)
     // 	}
     // });
-    // transaction may be accepted or refused, after validation is completed
-    // make validation here:
     res.status(200).send({
         message: "Transaction from address: this, to address: this, was successful",
     });
-};
+});
 exports.getAddressBalance = function (req, res) {
     var address = req.params.address;
     res.status(200).send("100");

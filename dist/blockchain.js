@@ -50,7 +50,7 @@ var Blockchain = /** @class */ (function () {
         this.miningReward = 100;
     }
     Blockchain.prototype.createGenesisBlock = function () {
-        return new block_1.default(time_1.default(), [], "0");
+        return new block_1.default((0, time_1.default)(), [], "0");
     };
     Blockchain.prototype.getLatestBlock = function () {
         return this.chain[this.chain.length - 1];
@@ -58,7 +58,7 @@ var Blockchain = /** @class */ (function () {
     Blockchain.prototype.minePendingTransactions = function (minerAddress) {
         /* make this function delay, till there are atleast 5 transactions,
         if still less, then dont send anything...*/
-        var block = new block_1.default(time_1.default(), this.pendingTransactions, this.getLatestBlock().hash); // currently we are just mining all the transactions that are pending
+        var block = new block_1.default((0, time_1.default)(), this.pendingTransactions, this.getLatestBlock().hash); // currently we are just mining all the transactions that are pending
         block.mineBlock(this.difficulty);
         console.log("Block successfully mined!");
         this.chain.push(block);
@@ -74,7 +74,7 @@ var Blockchain = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        block = new block_1.default(time_1.default(), this.pendingTransactions, this.getLatestBlock().hash);
+                        block = new block_1.default((0, time_1.default)(), this.pendingTransactions, this.getLatestBlock().hash);
                         if (!(!minerSolution.length || minerSolution == 0)) return [3 /*break*/, 1];
                         // only give them the block information
                         result(null, { block: block, difficulty: this.difficulty }); // send the blockchain data back to the user, along with the difficulty...
@@ -88,7 +88,7 @@ var Blockchain = /** @class */ (function () {
                         if (mymine == yourmine) {
                             // success
                             this.chain.push(block);
-                            console.log("Block successfully mined!");
+                            // console.log("Block successfully mined!");
                             this.chain.push(block);
                             this.pendingTransactions = [
                                 new transaction_1.default(null, minerAddress, this.miningReward),
@@ -127,7 +127,7 @@ var Blockchain = /** @class */ (function () {
         this.pendingTransactions.push(transaction);
         result(null, {
             success: true,
-            message: "Transaction: " + transaction + " has been added to the pendingTransactions",
+            message: "Transaction: ".concat(transaction, " has been added to the pendingTransactions"),
         });
     };
     Blockchain.prototype.getBalanceOfAddress = function (address) {
