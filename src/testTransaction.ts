@@ -11,21 +11,21 @@ const ec = new EC("secp256k1");
 
 let theJsonData = {};
 
-const func = () =>{
-    const myKey = ec.keyFromPrivate(
-        "f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0"
-    ); // passing in the private key
-    const myWalletAddress = myKey.getPublic("hex"); // mywalletaddress is my public key
+const func = () => {
+	const myKey = ec.keyFromPrivate(
+		"f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0"
+	); // passing in the private key
+	const myWalletAddress = myKey.getPublic("hex"); // mywalletaddress is my public key
 
-    theJsonData = {
-        fromAddress: myWalletAddress,
-        fromAddressPrivateKey: myKey,
-        toAddress: "jim",
-        amount: 10,
-    }
+	theJsonData = {
+		fromAddress: myWalletAddress,
+		fromAddressPrivateKey: myKey,
+		toAddress: "jim",
+		amount: 10,
+	};
 
-    createTransaction()
-}
+	createTransaction();
+};
 
 const createTransaction = async () => {
 	// first get the block:

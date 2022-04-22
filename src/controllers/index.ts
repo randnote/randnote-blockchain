@@ -78,15 +78,15 @@ exports.createTransaction = (req: Request, res: Response) => {
 	let toAddress = req.body.toAddress;
 
 	let newTransaction = new Transaction(fromAddress, toAddress, amount);
-	console.log("___"+newTransaction);
+	console.log("___" + newTransaction);
 
 	newTransaction.signTransaction(fromAddressPrivateKey);
 	// note.addTransaction(newTransaction); // instead of this, i need to add it to the signTransactionCLient
 	note.addTransactionClient(newTransaction, (err: Error, data: object) => {
-		if(err){
-			console.log("the blockchain gave us an error: ", err)
-		}else{
-			console.log(data)
+		if (err) {
+			console.log("the blockchain gave us an error: ", err);
+		} else {
+			console.log(data);
 		}
 	});
 
