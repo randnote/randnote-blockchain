@@ -38,7 +38,7 @@ class Transaction {
 	signTransaction(signingKey: any) {
 		// check this type in future
 		// singing key is the private key we sing with
-		console.log("signingKey in signTransaction func: "+ this.fromAddress)
+		console.log("signingKey in signTransaction func: " + this.fromAddress);
 		//console.log(signingKey); // lets do this, to validate that we indeed use the right key or not
 
 		// fist verify is the public key is the fromAddress, to only allow signing transactions that you own:

@@ -20,7 +20,7 @@ tx1.signTransaction(myKey);
 note.addTransaction(tx1);
 
 // console.log("mykey is: "+ JSON.stringify(myKey, null, 2))
-console.log(myKey)
+console.log(myKey);
 //
 // let tx12 = new Transaction(myWalletAddress, "paul", 300);
 // tx12.signTransaction(myKey);
@@ -76,13 +76,16 @@ exports.createTransaction = (req: Request, res: Response) => {
 	}
 
 	/* THIS IS A METHOD I TRIED THAT SENDS JUST THE STRING */
-	console.log( JSON.parse(req.body.obj));
+	console.log(JSON.parse(req.body.obj));
 	let myJsonInfo = JSON.parse(req.body.obj);
-	console.log(myJsonInfo.fromAddressPrivateKey) // with all that i have done so far, I have ended up with this 
+	console.log(myJsonInfo.fromAddressPrivateKey); // with all that i have done so far, I have ended up with this
 	//
-	let newTransaction = new Transaction(myJsonInfo.fromAddress, myJsonInfo.toAddress, myJsonInfo.amount);
+	let newTransaction = new Transaction(
+		myJsonInfo.fromAddress,
+		myJsonInfo.toAddress,
+		myJsonInfo.amount
+	);
 	newTransaction.signTransaction(myJsonInfo.fromAddressPrivateKey); // apparently the code never reaches this line....??>>?
-
 
 	// let amount = req.body.amount;
 	// let fromAddress = req.body.fromAddress;
