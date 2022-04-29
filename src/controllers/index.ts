@@ -18,14 +18,17 @@ const myWalletAddress = myKey.getPublic("hex"); // mywalletaddress is my public 
 let tx1 = new Transaction(myWalletAddress, "paul", 100);
 tx1.signTransaction(myKey);
 note.addTransaction(tx1);
+
+// console.log("mykey is: "+ JSON.stringify(myKey, null, 2))
+console.log(myKey)
 //
-let tx12 = new Transaction(myWalletAddress, "paul", 300);
-tx12.signTransaction(myKey);
-note.addTransaction(tx12);
-//
-let tx13 = new Transaction(myWalletAddress, "paul", 400);
-tx13.signTransaction(myKey);
-note.addTransaction(tx13);
+// let tx12 = new Transaction(myWalletAddress, "paul", 300);
+// tx12.signTransaction(myKey);
+// note.addTransaction(tx12);
+// //
+// let tx13 = new Transaction(myWalletAddress, "paul", 400);
+// tx13.signTransaction(myKey);
+// note.addTransaction(tx13);
 
 export { note }; // for the testblock page
 
@@ -71,24 +74,34 @@ exports.createTransaction = (req: Request, res: Response) => {
 		});
 		console.log("empty");
 	}
-	// console.log(req.body.fromAddress);
-	let amount = req.body.amount;
-	let fromAddress = req.body.fromAddress;
-	let fromAddressPrivateKey = req.body.fromAddressPrivateKey; // havent mad this yet...
-	let toAddress = req.body.toAddress;
 
-	let newTransaction = new Transaction(fromAddress, toAddress, amount);
-	console.log("___" + newTransaction);
+	/* THIS IS A METHOD I TRIED THAT SENDS JUST THE STRING */
+	console.log( JSON.parse(req.body.obj));
+	let myJsonInfo = JSON.parse(req.body.obj);
+	console.log(myJsonInfo.fromAddressPrivateKey) // with all that i have done so far, I have ended up with this 
+	//
+	let newTransaction = new Transaction(myJsonInfo.fromAddress, myJsonInfo.toAddress, myJsonInfo.amount);
+	newTransaction.signTransaction(myJsonInfo.fromAddressPrivateKey); // apparently the code never reaches this line....??>>?
 
-	newTransaction.signTransaction(fromAddressPrivateKey);
-	// note.addTransaction(newTransaction); // instead of this, i need to add it to the signTransactionCLient
-	note.addTransactionClient(newTransaction, (err: Error, data: object) => {
-		if (err) {
-			console.log("the blockchain gave us an error: ", err);
-		} else {
-			console.log(data);
-		}
-	});
+
+	// let amount = req.body.amount;
+	// let fromAddress = req.body.fromAddress;
+	// let fromAddressPrivateKey = req.body.fromAddressPrivateKey; // havent mad this yet...
+	// let toAddress = req.body.toAddress;
+
+	// let newTransaction = new Transaction(fromAddress, toAddress, amount);
+	// console.log("___" + JSON.stringify(newTransaction));
+	// console.log(req.body.fromAddressPrivateKey)
+
+	// newTransaction.signTransaction(req.body.fromAddressPrivateKey); // apparently the code never reaches this line....??>>?
+	// // note.addTransaction(newTransaction); // instead of this, i need to add it to the signTransactionCLient
+	// note.addTransactionClient(newTransaction, (err: Error, data: object) => {
+	// 	if (err) {
+	// 		console.log("the blockchain gave us an error: ", err);
+	// 	} else {
+	// 		console.log(data);
+	// 	}
+	// });
 
 	res.status(200).send({
 		message: `Transaction from address: this, to address: this, was successful`,

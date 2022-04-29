@@ -101,6 +101,9 @@ class Blockchain {
 
 	// The add transaction functinon for requests that come from the client:
 	addTransactionClient(transaction: any, result: any): void {
+
+		console.log("the transaction is : "+ transaction)
+
 		if (!transaction.fromAddress || !transaction.toAddress) {
 			throw new Error("Transaction must include from and to address");
 		}

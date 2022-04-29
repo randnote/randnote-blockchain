@@ -19,14 +19,8 @@ var myWalletAddress = myKey.getPublic("hex"); // mywalletaddress is my public ke
 var tx1 = new transaction_1.default(myWalletAddress, "paul", 100);
 tx1.signTransaction(myKey);
 note.addTransaction(tx1);
-//
-var tx12 = new transaction_1.default(myWalletAddress, "paul", 300);
-tx12.signTransaction(myKey);
-note.addTransaction(tx12);
-//
-var tx13 = new transaction_1.default(myWalletAddress, "paul", 400);
-tx13.signTransaction(myKey);
-note.addTransaction(tx13);
+// console.log("mykey is: "+ JSON.stringify(myKey, null, 2))
+console.log(myKey);
 //
 console.log("\nStarting the miner...");
 note.minePendingTransactions("paul");
@@ -60,23 +54,29 @@ exports.createTransaction = function (req, res) {
         });
         console.log("empty");
     }
-    // console.log(req.body.fromAddress);
-    var amount = req.body.amount;
-    var fromAddress = req.body.fromAddress;
-    var fromAddressPrivateKey = req.body.fromAddressPrivateKey; // havent mad this yet...
-    var toAddress = req.body.toAddress;
-    var newTransaction = new transaction_1.default(fromAddress, toAddress, amount);
-    console.log("___" + newTransaction);
-    newTransaction.signTransaction(fromAddressPrivateKey);
-    // note.addTransaction(newTransaction); // instead of this, i need to add it to the signTransactionCLient
-    note.addTransactionClient(newTransaction, function (err, data) {
-        if (err) {
-            console.log("the blockchain gave us an error: ", err);
-        }
-        else {
-            console.log(data);
-        }
-    });
+    // let jsonnn = JSON.parse(req.body)
+    console.log(JSON.parse(req.body.obj));
+    var myJsonInfo = JSON.parse(req.body.obj);
+    console.log(myJsonInfo.fromAddressPrivateKey); // with all that i have done so far, I have ended up with this 
+    //
+    var newTransaction = new transaction_1.default(myJsonInfo.fromAddress, myJsonInfo.toAddress, myJsonInfo.amount);
+    newTransaction.signTransaction(myJsonInfo.fromAddressPrivateKey); // apparently the code never reaches this line....??>>?
+    // let amount = req.body.amount;
+    // let fromAddress = req.body.fromAddress;
+    // let fromAddressPrivateKey = req.body.fromAddressPrivateKey; // havent mad this yet...
+    // let toAddress = req.body.toAddress;
+    // let newTransaction = new Transaction(fromAddress, toAddress, amount);
+    // console.log("___" + JSON.stringify(newTransaction));
+    // console.log(req.body.fromAddressPrivateKey)
+    // newTransaction.signTransaction(req.body.fromAddressPrivateKey); // apparently the code never reaches this line....??>>?
+    // // note.addTransaction(newTransaction); // instead of this, i need to add it to the signTransactionCLient
+    // note.addTransactionClient(newTransaction, (err: Error, data: object) => {
+    // 	if (err) {
+    // 		console.log("the blockchain gave us an error: ", err);
+    // 	} else {
+    // 		console.log(data);
+    // 	}
+    // });
     res.status(200).send({
         message: "Transaction from address: this, to address: this, was successful",
     });

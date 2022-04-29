@@ -23,8 +23,8 @@ const func = () => {
 		toAddress: "jim",
 		amount: 10,
 	};
-
-	createTransaction();
+	console.log("the from address is: __ "+JSON.stringify(theJsonData))
+	// createTransaction();
 };
 
 const createTransaction = async () => {
@@ -37,7 +37,29 @@ const createTransaction = async () => {
 	// 	toAddress: "romeo",
 	// 	amount: 10,
 	// };
-	Axios.post(`http://localhost:8033/transaction`, theJsonData).then(
+
+
+	const myKey = ec.keyFromPrivate(
+		"f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0"
+	); // passing in the private key
+	const myWalletAddress = myKey.getPublic("hex"); // mywalletaddress is my public key
+
+	console.log(myWalletAddress)
+	console.log(myKey)
+
+	let jsonn = {
+			fromAddress:
+			"f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0",
+			fromAddressPrivateKey:
+			"0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3",
+			toAddress: "romeo",
+			amount: 10,
+	}
+	let snack = JSON.stringify(jsonn)
+	// console.log)
+
+
+	Axios.post(`http://localhost:8033/transaction`,{obj: snack}).then(
 		async (response: any) => {
 			//
 			console.log(response.data);
@@ -45,4 +67,4 @@ const createTransaction = async () => {
 	);
 };
 
-func();
+createTransaction();

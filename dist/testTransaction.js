@@ -57,20 +57,25 @@ var func = function () {
         toAddress: "jim",
         amount: 10,
     };
-    createTransaction();
+    console.log("the from address is: __ " + JSON.stringify(theJsonData));
+    // createTransaction();
 };
 var createTransaction = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var myKey, myWalletAddress, jsonn, snack;
     return __generator(this, function (_a) {
-        // first get the block:
-        // const theJsonData = {
-        // 	fromAddress:
-        // 		"f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0",
-        // 	fromAddressPrivateKey:
-        // 		"0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3",
-        // 	toAddress: "romeo",
-        // 	amount: 10,
-        // };
-        axios_1.default.post("http://localhost:8033/transaction", theJsonData).then(function (response) { return __awaiter(void 0, void 0, void 0, function () {
+        myKey = ec.keyFromPrivate("f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0");
+        myWalletAddress = myKey.getPublic("hex");
+        console.log(myWalletAddress);
+        console.log(myKey);
+        jsonn = {
+            fromAddress: "f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0",
+            fromAddressPrivateKey: "0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3",
+            toAddress: "romeo",
+            amount: 10,
+        };
+        snack = JSON.stringify(jsonn);
+        // console.log)
+        axios_1.default.post("http://localhost:8033/transaction", { obj: snack }).then(function (response) { return __awaiter(void 0, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 //
                 console.log(response.data);
@@ -80,5 +85,5 @@ var createTransaction = function () { return __awaiter(void 0, void 0, void 0, f
         return [2 /*return*/];
     });
 }); };
-func();
+createTransaction();
 //# sourceMappingURL=testTransaction.js.map
