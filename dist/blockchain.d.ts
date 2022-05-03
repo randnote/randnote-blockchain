@@ -14,5 +14,6 @@ declare class Blockchain {
     getBalanceOfAddress(address: string): number;
     isChainValid(): boolean;
     getAllTransactions(): any;
+    getBlockchain(result: any): void;
 }
 export default Blockchain;

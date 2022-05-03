@@ -38,7 +38,8 @@ var Transaction = /** @class */ (function () {
     Transaction.prototype.signTransactionClient = function (theWalletAddress, theSigningKey) {
         var myKey = ec.keyFromPrivate(theSigningKey);
         var walletAddress = myKey.getPublic("hex");
-        if (theWalletAddress !== walletAddress || walletAddress !== this.fromAddress) {
+        if (theWalletAddress !== walletAddress ||
+            walletAddress !== this.fromAddress) {
             console.log("The address do not match bruh");
             throw new Error("You can only sign transactions that you own");
             // res.send stuff to the client

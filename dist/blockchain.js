@@ -180,6 +180,14 @@ var Blockchain = /** @class */ (function () {
         }
         return transactionsArray;
     };
+    Blockchain.prototype.getBlockchain = function (result) {
+        console.log("reached this blockchain function");
+        // 
+        result(null, {
+            chain: this.chain
+        });
+        // return this.chain;
+    };
     return Blockchain;
 }());
 exports.default = Blockchain;

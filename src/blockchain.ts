@@ -3,6 +3,7 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import Transaction from "./transaction";
 import Block from "./block";
 import getTimeFormatted from "./time";
+import { resourceLimits } from "worker_threads";
 
 class Blockchain {
 	chain: any;
@@ -173,6 +174,15 @@ class Blockchain {
 			// }
 		}
 		return transactionsArray;
+	}
+
+	getBlockchain(result:any){
+		console.log("reached this blockchain function")
+		// 
+		result(null, {
+			chain: this.chain
+		})
+		// return this.chain;
 	}
 }
 

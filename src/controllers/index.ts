@@ -121,11 +121,33 @@ exports.getAddressBalance = (req: Request, res: Response) => {
 
 exports.getBlockchain = (req: Request, res: Response) => {
 	// res.status(200).send("yes");
-	console.log("hello kitty");
-	res.status(200).send({
-		message: `hello`,
-	});
-};
+	// console.log("hello kitty");
+	// res.status(200).send({
+	// 	message: `hello`,
+	// });
+
+	// note.getBlockchain = (err: any, result: any) => {
+	// 	if(err){
+	// 		res.status(500).send({
+	// 			message: "Error occured"
+	// 		})
+	// 	}else{
+	// 		console.log(result)
+	// 		res.status(200).send({
+	// 			result: result
+	// 		});
+	// 	}
+
+	// }
+
+	note.getBlockchain( (err: any, result: any) => {
+		if(err){
+			res.status(500).send({
+				message: "Error occured"
+			})
+		} else res.send(result)
+	})
+}
 
 exports.getAllTransactions = (req: Request, res: Response) => {
 	console.log(note.getAllTransactions());
