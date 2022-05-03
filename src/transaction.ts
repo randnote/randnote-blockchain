@@ -52,21 +52,23 @@ class Transaction {
 		this.signature = sig.toDER("hex");
 	}
 
-	signTransactionClient(theWalletAddress: string, theSigningKey:string){
-		const myKey = ec.keyFromPrivate(theSigningKey); 
-		const walletAddress = myKey.getPublic("hex"); 
+	signTransactionClient(theWalletAddress: string, theSigningKey: string) {
+		const myKey = ec.keyFromPrivate(theSigningKey);
+		const walletAddress = myKey.getPublic("hex");
 
-		if(theWalletAddress !== walletAddress || walletAddress !== this.fromAddress){
+		if (
+			theWalletAddress !== walletAddress ||
+			walletAddress !== this.fromAddress
+		) {
 			console.log("The address do not match bruh");
 			throw new Error("You can only sign transactions that you own");
 			// res.send stuff to the client
-		}else{
+		} else {
 			//
 			const hashTx = this.calculateHash();
 			const sig = myKey.sign(hashTx, "base64");
 			this.signature = sig.toDER("hex");
 		}
-
 	}
 
 	// verify a transaction func:
