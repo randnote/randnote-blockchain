@@ -14,6 +14,7 @@ declare class Transaction {
     constructor(fromAddress: any, toAddress: any, amount: any);
     calculateHash(): any;
     signTransaction(signingKey: any): void;
+    signTransactionClient(theWalletAddress: string, theSigningKey: string): void;
     isValid(): any;
 }
 export default Transaction;

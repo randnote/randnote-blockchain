@@ -54,13 +54,13 @@ exports.createTransaction = function (req, res) {
         });
         console.log("empty");
     }
-    // let jsonnn = JSON.parse(req.body)
+    /* THIS IS A METHOD I TRIED THAT SENDS JUST THE STRING */
     console.log(JSON.parse(req.body.obj));
     var myJsonInfo = JSON.parse(req.body.obj);
-    console.log(myJsonInfo.fromAddressPrivateKey); // with all that i have done so far, I have ended up with this 
+    console.log(myJsonInfo.fromAddressPrivateKey); // with all that i have done so far, I have ended up with this
     //
     var newTransaction = new transaction_1.default(myJsonInfo.fromAddress, myJsonInfo.toAddress, myJsonInfo.amount);
-    newTransaction.signTransaction(myJsonInfo.fromAddressPrivateKey); // apparently the code never reaches this line....??>>?
+    newTransaction.signTransactionClient(myJsonInfo.fromAddress, myJsonInfo.fromAddressPrivateKey); // apparently the code never reaches this line....??>>?
     // let amount = req.body.amount;
     // let fromAddress = req.body.fromAddress;
     // let fromAddressPrivateKey = req.body.fromAddressPrivateKey; // havent mad this yet...
@@ -86,7 +86,11 @@ exports.getAddressBalance = function (req, res) {
     res.status(200).send("100");
 };
 exports.getBlockchain = function (req, res) {
-    res.status(200).send("yes");
+    // res.status(200).send("yes");
+    console.log("hello kitty");
+    res.status(200).send({
+        message: "hello",
+    });
 };
 exports.getAllTransactions = function (req, res) {
     console.log(note.getAllTransactions());

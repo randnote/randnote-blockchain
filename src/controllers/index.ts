@@ -85,7 +85,7 @@ exports.createTransaction = (req: Request, res: Response) => {
 		myJsonInfo.toAddress,
 		myJsonInfo.amount
 	);
-	newTransaction.signTransaction(myJsonInfo.fromAddressPrivateKey); // apparently the code never reaches this line....??>>?
+	newTransaction.signTransactionClient(myJsonInfo.fromAddress, myJsonInfo.fromAddressPrivateKey); // apparently the code never reaches this line....??>>?
 
 	// let amount = req.body.amount;
 	// let fromAddress = req.body.fromAddress;
@@ -117,7 +117,11 @@ exports.getAddressBalance = (req: Request, res: Response) => {
 };
 
 exports.getBlockchain = (req: Request, res: Response) => {
-	res.status(200).send("yes");
+	// res.status(200).send("yes");
+	console.log("hello kitty")
+	res.status(200).send({
+		message: `hello`,
+	});
 };
 
 exports.getAllTransactions = (req: Request, res: Response) => {

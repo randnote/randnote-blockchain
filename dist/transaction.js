@@ -35,6 +35,21 @@ var Transaction = /** @class */ (function () {
         var sig = signingKey.sign(hashTx, "base64");
         this.signature = sig.toDER("hex");
     };
+    Transaction.prototype.signTransactionClient = function (theWalletAddress, theSigningKey) {
+        var myKey = ec.keyFromPrivate(theSigningKey);
+        var walletAddress = myKey.getPublic("hex");
+        if (theWalletAddress !== walletAddress || walletAddress !== this.fromAddress) {
+            console.log("The address do not match bruh");
+            throw new Error("You can only sign transactions that you own");
+            // res.send stuff to the client
+        }
+        else {
+            //
+            var hashTx = this.calculateHash();
+            var sig = myKey.sign(hashTx, "base64");
+            this.signature = sig.toDER("hex");
+        }
+    };
     // verify a transaction func:
     // since a transaction is supposed to be signed, we check if indeed it is and verfiy the signature: using the verify() func
     Transaction.prototype.isValid = function () {
