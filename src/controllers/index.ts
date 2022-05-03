@@ -59,12 +59,6 @@ exports.mine = (req: Request, res: Response) => {
 			else res.status(200).send(data);
 		}
 	);
-
-	// let minerAddress = req.params.minerAddress;
-
-	// res.status(200).send({
-	// 	reward: 100,
-	// });
 };
 
 exports.createTransaction = (req: Request, res: Response) => {
@@ -90,25 +84,7 @@ exports.createTransaction = (req: Request, res: Response) => {
 		myJsonInfo.fromAddressPrivateKey
 	); // apparently the code never reaches this line....??>>?
 
-	// let amount = req.body.amount;
-	// let fromAddress = req.body.fromAddress;
-	// let fromAddressPrivateKey = req.body.fromAddressPrivateKey; // havent mad this yet...
-	// let toAddress = req.body.toAddress;
-
-	// let newTransaction = new Transaction(fromAddress, toAddress, amount);
-	// console.log("___" + JSON.stringify(newTransaction));
-	// console.log(req.body.fromAddressPrivateKey)
-
-	// newTransaction.signTransaction(req.body.fromAddressPrivateKey); // apparently the code never reaches this line....??>>?
-	// // note.addTransaction(newTransaction); // instead of this, i need to add it to the signTransactionCLient
-	// note.addTransactionClient(newTransaction, (err: Error, data: object) => {
-	// 	if (err) {
-	// 		console.log("the blockchain gave us an error: ", err);
-	// 	} else {
-	// 		console.log(data);
-	// 	}
-	// });
-
+	
 	res.status(200).send({
 		message: `Transaction from address: this, to address: this, was successful`,
 	});
@@ -120,26 +96,6 @@ exports.getAddressBalance = (req: Request, res: Response) => {
 };
 
 exports.getBlockchain = (req: Request, res: Response) => {
-	// res.status(200).send("yes");
-	// console.log("hello kitty");
-	// res.status(200).send({
-	// 	message: `hello`,
-	// });
-
-	// note.getBlockchain = (err: any, result: any) => {
-	// 	if(err){
-	// 		res.status(500).send({
-	// 			message: "Error occured"
-	// 		})
-	// 	}else{
-	// 		console.log(result)
-	// 		res.status(200).send({
-	// 			result: result
-	// 		});
-	// 	}
-
-	// }
-
 	note.getBlockchain((err: any, result: any) => {
 		if (err) {
 			res.status(500).send({
@@ -152,12 +108,4 @@ exports.getBlockchain = (req: Request, res: Response) => {
 exports.getAllTransactions = (req: Request, res: Response) => {
 	console.log(note.getAllTransactions());
 	res.status(200).send(note.getAllTransactions());
-	// res.status(200).send("yes");
-
-	//     res.status(500).send({
-	//       message:
-	//         err.message || "Some error occurred while retrieving Admins."
-	//     });
-	//   else res.send(data);
-	// });
 };

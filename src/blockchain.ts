@@ -166,12 +166,6 @@ class Blockchain {
 		let transactionsArrayFormatted: string[] = [];
 		for (let i = 0; i < this.chain.length; i++) {
 			transactionsArray.push(this.chain[i].transactions);
-			// for (let j = 0; j < transactionsArray.length; j++) {
-			// 	const {fromAddress, toAddress, amount} = transactionsArray[j]
-			// 	transactionsArrayFormatted.push(`${count}. fromAddress: ${fromAddress}, \t toAddress: ${toAddress},\t amount : ${amount}`)
-			// 	count++;
-
-			// }
 		}
 		return transactionsArray;
 	}
