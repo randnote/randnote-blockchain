@@ -140,14 +140,14 @@ exports.getBlockchain = (req: Request, res: Response) => {
 
 	// }
 
-	note.getBlockchain( (err: any, result: any) => {
-		if(err){
+	note.getBlockchain((err: any, result: any) => {
+		if (err) {
 			res.status(500).send({
-				message: "Error occured"
-			})
-		} else res.send(result)
-	})
-}
+				message: "Error occured",
+			});
+		} else res.send(result);
+	});
+};
 
 exports.getAllTransactions = (req: Request, res: Response) => {
 	console.log(note.getAllTransactions());

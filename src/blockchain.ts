@@ -176,13 +176,10 @@ class Blockchain {
 		return transactionsArray;
 	}
 
-	getBlockchain(result:any){
-		console.log("reached this blockchain function")
-		// 
+	getBlockchain(result: any) {
 		result(null, {
-			chain: this.chain
-		})
-		// return this.chain;
+			chain: this.chain,
+		});
 	}
 }
 
