@@ -172,21 +172,13 @@ var Blockchain = /** @class */ (function () {
         var transactionsArrayFormatted = [];
         for (var i = 0; i < this.chain.length; i++) {
             transactionsArray.push(this.chain[i].transactions);
-            // for (let j = 0; j < transactionsArray.length; j++) {
-            // 	const {fromAddress, toAddress, amount} = transactionsArray[j]
-            // 	transactionsArrayFormatted.push(`${count}. fromAddress: ${fromAddress}, \t toAddress: ${toAddress},\t amount : ${amount}`)
-            // 	count++;
-            // }
         }
         return transactionsArray;
     };
     Blockchain.prototype.getBlockchain = function (result) {
-        console.log("reached this blockchain function");
-        // 
         result(null, {
-            chain: this.chain
+            chain: this.chain,
         });
-        // return this.chain;
     };
     return Blockchain;
 }());

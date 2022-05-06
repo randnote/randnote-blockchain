@@ -1,9 +1,5 @@
 import { Application } from "express";
 
-const getBlockchain = () => {
-	return 100;
-};
-
 module.exports = (app: Application) => {
 	const B = require("../controllers/index");
 

@@ -84,7 +84,6 @@ exports.createTransaction = (req: Request, res: Response) => {
 		myJsonInfo.fromAddressPrivateKey
 	); // apparently the code never reaches this line....??>>?
 
-	
 	res.status(200).send({
 		message: `Transaction from address: this, to address: this, was successful`,
 	});
