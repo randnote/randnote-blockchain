@@ -77,8 +77,8 @@ var Blockchain = /** @class */ (function () {
                         if (this.pendingTransactions.length === 0) {
                             console.log("Tried mining with no transactions in the pendingTransactions Array.");
                             result({
-                                message: '0 Pending transactions to be mined, try again next time',
-                                success: false
+                                message: "0 Pending transactions to be mined, try again next time",
+                                success: false,
                             }, null);
                             return [2 /*return*/];
                         }

@@ -20,6 +20,7 @@ exports.mine = function (req, res) {
     note.minePendingTransactionsClient(req.params.minerAddress, req.params.minerSolution, function (err, data) {
         if (err)
             res.status(204).send({
+                // 204 for success but with no 'real affect to the block chain'
                 success: "false",
                 message: err.message ||
                     "The block hash you solved is not real/valid or whatever",
