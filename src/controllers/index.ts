@@ -91,7 +91,12 @@ exports.createTransaction = (req: Request, res: Response) => {
 
 exports.getAddressBalance = (req: Request, res: Response) => {
 	let address = req.params.address;
-	res.status(200).send("100");
+
+	let balance : number = note.getBalanceOfAddress(address);
+	res.status(200).send({
+		msg: `The balance of the address: ${address} is : ${balance}`,
+		balance: balance
+	});
 };
 
 exports.getBlockchain = (req: Request, res: Response) => {

@@ -63,7 +63,11 @@ exports.createTransaction = function (req, res) {
 };
 exports.getAddressBalance = function (req, res) {
     var address = req.params.address;
-    res.status(200).send("100");
+    var balance = note.getBalanceOfAddress(address);
+    res.status(200).send({
+        msg: "The balance of the address: ".concat(address, " is : ").concat(balance),
+        balance: balance
+    });
 };
 exports.getBlockchain = function (req, res) {
     note.getBlockchain(function (err, result) {

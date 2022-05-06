@@ -1,8 +1,8 @@
 import Axios from "axios";
 const SHA256 = require("crypto-js/sha256");
 import { response } from "express";
-import Block from "./block";
-import { note } from "./controllers";
+import Block from "../block";
+import { note } from "../controllers";
 
 const calculateHash = (
 	timestamp: any,
