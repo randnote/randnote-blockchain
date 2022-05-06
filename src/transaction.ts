@@ -4,7 +4,7 @@ import Elliptic from "elliptic";
 const EC = Elliptic.ec;
 const ec = new EC("secp256k1");
 
-import {note} from './controllers'
+import { note } from "./controllers";
 
 export interface TransactionInterface {
 	timestamp?: string;
@@ -70,7 +70,6 @@ class Transaction {
 			const hashTx = this.calculateHash();
 			const sig = myKey.sign(hashTx, "base64");
 			this.signature = sig.toDER("hex");
-			
 		}
 	}
 

@@ -74,6 +74,14 @@ var Blockchain = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        if (this.pendingTransactions.length === 0) {
+                            console.log("Tried mining with no transactions in the pendingTransactions Array.");
+                            result({
+                                message: '0 Pending transactions to be mined, try again next time',
+                                success: false
+                            }, null);
+                            return [2 /*return*/];
+                        }
                         block = new block_1.default((0, time_1.default)(), this.pendingTransactions, this.getLatestBlock().hash);
                         if (!(!minerSolution.length || minerSolution == 0)) return [3 /*break*/, 1];
                         // only give them the block information
@@ -89,7 +97,6 @@ var Blockchain = /** @class */ (function () {
                             // success
                             this.chain.push(block);
                             // console.log("Block successfully mined!");
-                            this.chain.push(block);
                             this.pendingTransactions = [
                                 new transaction_1.default(null, minerAddress, this.miningReward),
                             ];

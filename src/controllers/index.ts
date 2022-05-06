@@ -23,9 +23,7 @@ const myWalletAddress = myKey.getPublic("hex"); // mywalletaddress is my public 
 // console.log("\nStarting the miner...");
 // note.minePendingTransactions("john_miner");
 
-
 export { note }; // for the testblock page
-
 
 //------------------------------------------------------------------------------
 
@@ -35,7 +33,7 @@ exports.mine = (req: Request, res: Response) => {
 		req.params.minerSolution,
 		(err: any, data: any): any => {
 			if (err)
-				res.status(200).send({
+				res.status(204).send({ // 204 for success but with no 'real affect to the block chain'
 					success: "false",
 					message:
 						err.message ||
@@ -55,7 +53,7 @@ exports.createTransaction = (req: Request, res: Response) => {
 	}
 
 	/* THIS IS A METHOD I TRIED THAT SENDS JUST THE STRING */
-	
+
 	let myJsonInfo = JSON.parse(req.body.obj);
 	//console.log(myJsonInfo.fromAddressPrivateKey); // with all that i have done so far, I have ended up with this
 	//
@@ -69,15 +67,16 @@ exports.createTransaction = (req: Request, res: Response) => {
 		myJsonInfo.fromAddressPrivateKey
 	); // apparently the code never reaches this line....??>>?
 
-	note.addTransactionClient(newTransaction, (err: any)=>{
-		if(err){
-			console.log(err)
+	note.addTransactionClient(newTransaction, (err: any) => {
+		if (err) {
+			console.log(err);
 		}
 	});
 
-
 	// console.log("A transaction has been created")
-	console.log(`Here is the pending transactions: ${note.getPendingTransactions()}`)
+	console.log(
+		`Here is the pending transactions: ${note.getPendingTransactions()}`
+	);
 
 	res.status(200).send({
 		message: `Transaction from address: this, to address: this, was successful`,

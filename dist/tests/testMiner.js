@@ -53,7 +53,16 @@ var mineBlock = function () { return __awaiter(void 0, void 0, void 0, function 
             var block, difficulty, hash;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, response.data.block];
+                    case 0:
+                        // console.log(response.data);
+                        /* I need to check the status code we get back before i continue to proceed..
+                        we are checking if we even have transactions to mine or not */
+                        console.log(response.status);
+                        if (response.status === 204) {
+                            console.log("There arent transactions to mine! Give it time & try again next time!");
+                            process.exit(1);
+                        }
+                        return [4 /*yield*/, response.data.block];
                     case 1:
                         block = _a.sent();
                         difficulty = 2;
@@ -80,7 +89,7 @@ var mineBlock = function () { return __awaiter(void 0, void 0, void 0, function 
     });
 }); };
 // console.log("hello");
-// mineBlock();
+mineBlock();
 // test by looking at the new blockchain
 // console.log(note.chain);
 //# sourceMappingURL=testMiner.js.map

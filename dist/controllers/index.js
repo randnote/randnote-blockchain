@@ -19,7 +19,7 @@ var myWalletAddress = myKey.getPublic("hex"); // mywalletaddress is my public ke
 exports.mine = function (req, res) {
     note.minePendingTransactionsClient(req.params.minerAddress, req.params.minerSolution, function (err, data) {
         if (err)
-            res.status(200).send({
+            res.status(204).send({
                 success: "false",
                 message: err.message ||
                     "The block hash you solved is not real/valid or whatever",

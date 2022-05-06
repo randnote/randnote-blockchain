@@ -52,6 +52,15 @@ class Blockchain {
 		minerSolution: any,
 		result: any
 	) {
+		if(this.pendingTransactions.length === 0){
+			console.log("Tried mining with no transactions in the pendingTransactions Array.")
+			result({
+				message: '0 Pending transactions to be mined, try again next time',
+				success: false
+			}, null)
+			return
+		}
+
 		/* if the client queries with an empty string or null for the minerSolution, then they just want the block to mine,
 		however if they send both minerAddress and the minerSolution, then they think they have a solution... */
 		let block = new Block(
@@ -73,7 +82,6 @@ class Blockchain {
 				// success
 				this.chain.push(block);
 				// console.log("Block successfully mined!");
-				this.chain.push(block);
 
 				this.pendingTransactions = [
 					new Transaction(null, minerAddress, this.miningReward),
@@ -176,15 +184,15 @@ class Blockchain {
 		});
 	}
 
-	getPendingTransactions(){
+	getPendingTransactions() {
 		let arr: any = [];
-		if(this.pendingTransactions.length === 0){
+		if (this.pendingTransactions.length === 0) {
 			console.log("Array is empty!!");
-		}else{
-			for(let i = 0; i < this.pendingTransactions.length; i++){
+		} else {
+			for (let i = 0; i < this.pendingTransactions.length; i++) {
 				console.log(this.pendingTransactions[i]);
-				arr.push(this.pendingTransactions[i])
-			  }
+				arr.push(this.pendingTransactions[i]);
+			}
 		}
 		return arr;
 	}
