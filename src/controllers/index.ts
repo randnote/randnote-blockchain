@@ -33,7 +33,8 @@ exports.mine = (req: Request, res: Response) => {
 		req.params.minerSolution,
 		(err: any, data: any): any => {
 			if (err)
-				res.status(204).send({ // 204 for success but with no 'real affect to the block chain'
+				res.status(204).send({
+					// 204 for success but with no 'real affect to the block chain'
 					success: "false",
 					message:
 						err.message ||

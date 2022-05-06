@@ -52,13 +52,19 @@ class Blockchain {
 		minerSolution: any,
 		result: any
 	) {
-		if(this.pendingTransactions.length === 0){
-			console.log("Tried mining with no transactions in the pendingTransactions Array.")
-			result({
-				message: '0 Pending transactions to be mined, try again next time',
-				success: false
-			}, null)
-			return
+		if (this.pendingTransactions.length === 0) {
+			console.log(
+				"Tried mining with no transactions in the pendingTransactions Array."
+			);
+			result(
+				{
+					message:
+						"0 Pending transactions to be mined, try again next time",
+					success: false,
+				},
+				null
+			);
+			return;
 		}
 
 		/* if the client queries with an empty string or null for the minerSolution, then they just want the block to mine,

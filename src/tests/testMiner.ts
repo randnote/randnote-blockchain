@@ -27,10 +27,12 @@ const mineBlock = async () => {
 
 			/* I need to check the status code we get back before i continue to proceed.. 
 			we are checking if we even have transactions to mine or not */
-			console.log(response.status)
-			if(response.status === 204){
-				console.log("There arent transactions to mine! Give it time & try again next time!")
-				process.exit(1)
+			console.log(response.status);
+			if (response.status === 204) {
+				console.log(
+					"There arent transactions to mine! Give it time & try again next time!"
+				);
+				process.exit(1);
 			}
 
 			let block = await response.data.block;
