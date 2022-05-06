@@ -15,5 +15,6 @@ declare class Blockchain {
     isChainValid(): boolean;
     getAllTransactions(): any;
     getBlockchain(result: any): void;
+    getPendingTransactions(): any;
 }
 export default Blockchain;

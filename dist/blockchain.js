@@ -180,6 +180,19 @@ var Blockchain = /** @class */ (function () {
             chain: this.chain,
         });
     };
+    Blockchain.prototype.getPendingTransactions = function () {
+        var arr = [];
+        if (this.pendingTransactions.length === 0) {
+            console.log("Array is empty!!");
+        }
+        else {
+            for (var i = 0; i < this.pendingTransactions.length; i++) {
+                console.log(this.pendingTransactions[i]);
+                arr.push(this.pendingTransactions[i]);
+            }
+        }
+        return arr;
+    };
     return Blockchain;
 }());
 exports.default = Blockchain;

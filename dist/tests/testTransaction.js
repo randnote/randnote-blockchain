@@ -47,26 +47,13 @@ the strings but replicate the format in which the "signTransaction " file desire
 var elliptic_1 = __importDefault(require("elliptic"));
 var EC = elliptic_1.default.ec;
 var ec = new EC("secp256k1");
-var theJsonData = {};
-var func = function () {
-    var myKey = ec.keyFromPrivate("f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0"); // passing in the private key
-    var myWalletAddress = myKey.getPublic("hex"); // mywalletaddress is my public key
-    theJsonData = {
-        fromAddress: myWalletAddress,
-        fromAddressPrivateKey: myKey,
-        toAddress: "jim",
-        amount: 10,
-    };
-    console.log("the from address is: __ " + JSON.stringify(theJsonData));
-    // createTransaction();
-};
 var createTransaction = function () { return __awaiter(void 0, void 0, void 0, function () {
     var jsonn, snack;
     return __generator(this, function (_a) {
         jsonn = {
             fromAddress: "0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3",
             fromAddressPrivateKey: "f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0",
-            toAddress: "romeo",
+            toAddress: "paul",
             amount: 10,
         };
         snack = JSON.stringify(jsonn);

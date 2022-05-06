@@ -15,21 +15,6 @@ var note = new blockchain_1.default();
 exports.note = note;
 var myKey = ec.keyFromPrivate("f224f9e944b73c51ee9a8140b65e8f06e1422a3fecc4c79fc8577bc80a427ce0"); // passing in the private key
 var myWalletAddress = myKey.getPublic("hex"); // mywalletaddress is my public key
-// create sample transaction and sign it:
-var tx1 = new transaction_1.default(myWalletAddress, "paul", 100);
-tx1.signTransaction(myKey);
-note.addTransaction(tx1);
-// console.log("mykey is: "+ JSON.stringify(myKey, null, 2))
-console.log(myKey);
-//
-console.log("\nStarting the miner...");
-note.minePendingTransactions("paul");
-// console.log("\nBalance of paul is: " + note.getBalanceOfAddress("paul"));
-//second mining:
-// note.minePendingTransactions("jackie");
-// console.log("Balance of paul is: " + note.getBalanceOfAddress("paul"));
-// console.log("\n");
-// console.log(note.getAllTransactions());
 //------------------------------------------------------------------------------
 exports.mine = function (req, res) {
     note.minePendingTransactionsClient(req.params.minerAddress, req.params.minerSolution, function (err, data) {
@@ -51,12 +36,18 @@ exports.createTransaction = function (req, res) {
         console.log("empty");
     }
     /* THIS IS A METHOD I TRIED THAT SENDS JUST THE STRING */
-    console.log(JSON.parse(req.body.obj));
     var myJsonInfo = JSON.parse(req.body.obj);
-    console.log(myJsonInfo.fromAddressPrivateKey); // with all that i have done so far, I have ended up with this
+    //console.log(myJsonInfo.fromAddressPrivateKey); // with all that i have done so far, I have ended up with this
     //
     var newTransaction = new transaction_1.default(myJsonInfo.fromAddress, myJsonInfo.toAddress, myJsonInfo.amount);
     newTransaction.signTransactionClient(myJsonInfo.fromAddress, myJsonInfo.fromAddressPrivateKey); // apparently the code never reaches this line....??>>?
+    note.addTransactionClient(newTransaction, function (err) {
+        if (err) {
+            console.log(err);
+        }
+    });
+    // console.log("A transaction has been created")
+    console.log("Here is the pending transactions: ".concat(note.getPendingTransactions()));
     res.status(200).send({
         message: "Transaction from address: this, to address: this, was successful",
     });
@@ -66,7 +57,7 @@ exports.getAddressBalance = function (req, res) {
     var balance = note.getBalanceOfAddress(address);
     res.status(200).send({
         msg: "The balance of the address: ".concat(address, " is : ").concat(balance),
-        balance: balance
+        balance: balance,
     });
 };
 exports.getBlockchain = function (req, res) {
@@ -81,7 +72,7 @@ exports.getBlockchain = function (req, res) {
     });
 };
 exports.getAllTransactions = function (req, res) {
-    console.log(note.getAllTransactions());
+    // console.log(note.getAllTransactions());
     res.status(200).send(note.getAllTransactions());
 };
 //# sourceMappingURL=index.js.map

@@ -47,7 +47,7 @@ var calculateHash = function (timestamp, previousHash, transactions, nonce) {
 var mineBlock = function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         // first get the block:
-        axios_1.default.get("http://localhost:8033/mine/0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3/0").then(function (response) { return __awaiter(void 0, void 0, void 0, function () {
+        axios_1.default.get("http://localhost:8033/mine/john_miner/0").then(function (response) { return __awaiter(void 0, void 0, void 0, function () {
             var block, difficulty, hash;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -67,7 +67,7 @@ var mineBlock = function () { return __awaiter(void 0, void 0, void 0, function 
                         }
                         console.log("BLOCK MINED: " + block["hash"]); // just displays the hash string
                         // now send to the server:
-                        axios_1.default.get("http://localhost:8033/mine/0465f31d0233efa00f829098040de97d254922bc6730a2f59bee6525e203a5c3f10168be5391b28eb9fa81a0aa87583040c2e9542b7aad50666577b446239d6fc3/".concat(hash)).then(function (response) {
+                        axios_1.default.get("http://localhost:8033/mine/john_miner/".concat(hash)).then(function (response) {
                             console.log(response.data);
                         });
                         return [2 /*return*/];

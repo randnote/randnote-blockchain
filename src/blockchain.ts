@@ -8,7 +8,7 @@ import { resourceLimits } from "worker_threads";
 class Blockchain {
 	chain: any;
 	difficulty: any;
-	pendingTransactions: any;
+	public pendingTransactions: any;
 	miningReward: any;
 
 	constructor() {
@@ -174,6 +174,19 @@ class Blockchain {
 		result(null, {
 			chain: this.chain,
 		});
+	}
+
+	getPendingTransactions(){
+		let arr: any = [];
+		if(this.pendingTransactions.length === 0){
+			console.log("Array is empty!!");
+		}else{
+			for(let i = 0; i < this.pendingTransactions.length; i++){
+				console.log(this.pendingTransactions[i]);
+				arr.push(this.pendingTransactions[i])
+			  }
+		}
+		return arr;
 	}
 }
 

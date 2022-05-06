@@ -15,33 +15,18 @@ const myKey = ec.keyFromPrivate(
 const myWalletAddress = myKey.getPublic("hex"); // mywalletaddress is my public key
 
 // create sample transaction and sign it:
-let tx1 = new Transaction(myWalletAddress, "paul", 100);
-tx1.signTransaction(myKey);
-note.addTransaction(tx1);
+// let tx1 = new Transaction(myWalletAddress, "paul", 100);
+// tx1.signTransaction(myKey);
+// note.addTransaction(tx1);
 
-// console.log("mykey is: "+ JSON.stringify(myKey, null, 2))
-console.log(myKey);
-//
-// let tx12 = new Transaction(myWalletAddress, "paul", 300);
-// tx12.signTransaction(myKey);
-// note.addTransaction(tx12);
-// //
-// let tx13 = new Transaction(myWalletAddress, "paul", 400);
-// tx13.signTransaction(myKey);
-// note.addTransaction(tx13);
+// sample miner
+// console.log("\nStarting the miner...");
+// note.minePendingTransactions("john_miner");
+
 
 export { note }; // for the testblock page
 
-//
-console.log("\nStarting the miner...");
-note.minePendingTransactions("paul");
-// console.log("\nBalance of paul is: " + note.getBalanceOfAddress("paul"));
 
-//second mining:
-// note.minePendingTransactions("jackie");
-// console.log("Balance of paul is: " + note.getBalanceOfAddress("paul"));
-// console.log("\n");
-// console.log(note.getAllTransactions());
 //------------------------------------------------------------------------------
 
 exports.mine = (req: Request, res: Response) => {
@@ -70,9 +55,9 @@ exports.createTransaction = (req: Request, res: Response) => {
 	}
 
 	/* THIS IS A METHOD I TRIED THAT SENDS JUST THE STRING */
-	console.log(JSON.parse(req.body.obj));
+	
 	let myJsonInfo = JSON.parse(req.body.obj);
-	console.log(myJsonInfo.fromAddressPrivateKey); // with all that i have done so far, I have ended up with this
+	//console.log(myJsonInfo.fromAddressPrivateKey); // with all that i have done so far, I have ended up with this
 	//
 	let newTransaction = new Transaction(
 		myJsonInfo.fromAddress,
@@ -84,6 +69,16 @@ exports.createTransaction = (req: Request, res: Response) => {
 		myJsonInfo.fromAddressPrivateKey
 	); // apparently the code never reaches this line....??>>?
 
+	note.addTransactionClient(newTransaction, (err: any)=>{
+		if(err){
+			console.log(err)
+		}
+	});
+
+
+	// console.log("A transaction has been created")
+	console.log(`Here is the pending transactions: ${note.getPendingTransactions()}`)
+
 	res.status(200).send({
 		message: `Transaction from address: this, to address: this, was successful`,
 	});
@@ -92,10 +87,10 @@ exports.createTransaction = (req: Request, res: Response) => {
 exports.getAddressBalance = (req: Request, res: Response) => {
 	let address = req.params.address;
 
-	let balance : number = note.getBalanceOfAddress(address);
+	let balance: number = note.getBalanceOfAddress(address);
 	res.status(200).send({
 		msg: `The balance of the address: ${address} is : ${balance}`,
-		balance: balance
+		balance: balance,
 	});
 };
 
@@ -110,6 +105,6 @@ exports.getBlockchain = (req: Request, res: Response) => {
 };
 
 exports.getAllTransactions = (req: Request, res: Response) => {
-	console.log(note.getAllTransactions());
+	// console.log(note.getAllTransactions());
 	res.status(200).send(note.getAllTransactions());
 };
