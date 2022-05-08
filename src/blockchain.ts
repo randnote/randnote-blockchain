@@ -102,6 +102,13 @@ class Blockchain {
 		}
 	}
 
+	// function that allocated funds to users that are provided by the autoFunds file...
+	// we call this function to get the users in the db... then we allocate...
+
+	// allocateFunds(): void{
+
+	// }
+
 	addTransaction(transaction: any): void {
 		if (!transaction.fromAddress || !transaction.toAddress) {
 			throw new Error("Transaction must include from and to address");
