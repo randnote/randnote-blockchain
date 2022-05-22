@@ -102,7 +102,6 @@ class Blockchain {
 				result({ message: "wrong solution" }, null); // added error mesasge
 			}
 		}
-
 	}
 
 	// function that allocated funds to users that are provided by the autoFunds file...

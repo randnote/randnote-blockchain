@@ -109,9 +109,8 @@ exports.getAllTransactions = (req: Request, res: Response) => {
 	res.status(200).send(note.getAllTransactions());
 };
 
-exports.getSupply = (req:Request, res: Response) =>{
-
+exports.getSupply = (req: Request, res: Response) => {
 	res.status(200).send({
-		supply: note.getSupply()
-	})
-}
+		supply: note.getSupply(),
+	});
+};
