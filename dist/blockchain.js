@@ -48,6 +48,7 @@ var Blockchain = /** @class */ (function () {
         this.difficulty = 2;
         this.pendingTransactions = [];
         this.miningReward = 100;
+        this.supply = 0;
     }
     Blockchain.prototype.createGenesisBlock = function () {
         return new block_1.default((0, time_1.default)(), [], "0");
@@ -203,6 +204,9 @@ var Blockchain = /** @class */ (function () {
             }
         }
         return arr;
+    };
+    Blockchain.prototype.getSupply = function () {
+        return this.supply;
     };
     return Blockchain;
 }());

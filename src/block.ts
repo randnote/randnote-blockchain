@@ -1,4 +1,5 @@
 const SHA256 = require("crypto-js/sha256");
+import { note } from "./controllers";
 import getTimeFormatted from "./time";
 class Block {
 	block: any;
@@ -36,6 +37,8 @@ class Block {
 			this.hash = this.calculateHash();
 		}
 		console.log("BLOCK MINED: " + this.hash); // just displays the hash string
+		// this.supply += this.miningReward;
+		note.supply += note.miningReward;
 
 		return this.hash;
 	}

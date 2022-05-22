@@ -8,6 +8,7 @@ module.exports = (app: Application) => {
 	app.get("/transactions", B.getAllTransactions);
 	app.get("/mine/:minerAddress/:minerSolution", B.mine);
 	app.get("/balance/:address", B.getAddressBalance);
+	app.get("/supply", B.getSupply);
 
 	// posts
 	app.post("/transaction", B.createTransaction);

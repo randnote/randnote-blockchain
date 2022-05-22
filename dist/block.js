@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var SHA256 = require("crypto-js/sha256");
+var controllers_1 = require("./controllers");
 var Block = /** @class */ (function () {
     function Block(timestamp, transactions, previousHash) {
         this.timestamp = timestamp;
@@ -24,6 +25,8 @@ var Block = /** @class */ (function () {
             this.hash = this.calculateHash();
         }
         console.log("BLOCK MINED: " + this.hash); // just displays the hash string
+        // this.supply += this.miningReward;
+        controllers_1.note.supply += controllers_1.note.miningReward;
         return this.hash;
     };
     Block.prototype.hasValidTransactions = function () {

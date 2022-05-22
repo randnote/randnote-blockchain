@@ -76,4 +76,9 @@ exports.getAllTransactions = function (req, res) {
     // console.log(note.getAllTransactions());
     res.status(200).send(note.getAllTransactions());
 };
+exports.getSupply = function (req, res) {
+    res.status(200).send({
+        supply: note.getSupply()
+    });
+};
 //# sourceMappingURL=index.js.map

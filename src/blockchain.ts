@@ -10,12 +10,14 @@ class Blockchain {
 	difficulty: any;
 	public pendingTransactions: any;
 	miningReward: any;
+	public supply: number;
 
 	constructor() {
 		this.chain = [this.createGenesisBlock()];
 		this.difficulty = 2;
 		this.pendingTransactions = [];
 		this.miningReward = 100;
+		this.supply = 0;
 	}
 
 	createGenesisBlock() {
@@ -100,6 +102,7 @@ class Blockchain {
 				result({ message: "wrong solution" }, null); // added error mesasge
 			}
 		}
+
 	}
 
 	// function that allocated funds to users that are provided by the autoFunds file...
@@ -208,6 +211,10 @@ class Blockchain {
 			}
 		}
 		return arr;
+	}
+
+	getSupply() {
+		return this.supply;
 	}
 }
 

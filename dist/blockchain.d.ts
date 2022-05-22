@@ -4,6 +4,7 @@ declare class Blockchain {
     difficulty: any;
     pendingTransactions: any;
     miningReward: any;
+    supply: number;
     constructor();
     createGenesisBlock(): Block;
     getLatestBlock(): any;
@@ -16,5 +17,6 @@ declare class Blockchain {
     getAllTransactions(): any;
     getBlockchain(result: any): void;
     getPendingTransactions(): any;
+    getSupply(): number;
 }
 export default Blockchain;

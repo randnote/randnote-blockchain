@@ -108,3 +108,10 @@ exports.getAllTransactions = (req: Request, res: Response) => {
 	// console.log(note.getAllTransactions());
 	res.status(200).send(note.getAllTransactions());
 };
+
+exports.getSupply = (req:Request, res: Response) =>{
+
+	res.status(200).send({
+		supply: note.getSupply()
+	})
+}
