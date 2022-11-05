@@ -10,6 +10,8 @@ module.exports = (app: Application) => {
 	app.get("/balance/:address", B.getAddressBalance);
 	app.get("/supply", B.getSupply);
 
+	// randnote transact: This is used when user buys Notes, and the website needs to give Notes to that user.
+
 	// posts
 	app.post("/transaction", B.createTransaction);
 };
