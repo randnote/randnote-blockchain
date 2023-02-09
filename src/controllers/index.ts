@@ -56,6 +56,7 @@ exports.createTransaction = (req: Request, res: Response) => {
 	/* THIS IS A METHOD I TRIED THAT SENDS JUST THE STRING */
 
 	let myJsonInfo = JSON.parse(req.body.obj);
+	console.log(req.body.obj)
 	//console.log(myJsonInfo.fromAddressPrivateKey); // with all that i have done so far, I have ended up with this
 	//
 	let newTransaction = new Transaction(
@@ -82,7 +83,7 @@ exports.createTransaction = (req: Request, res: Response) => {
 	res.status(200).send({
 		message: `Transaction from address: this, to address: this, was successful`,
 	});
-};
+}; // END OF CREATE TRANSACTION
 
 exports.getAddressBalance = (req: Request, res: Response) => {
 	let address = req.params.address;

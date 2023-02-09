@@ -27,12 +27,12 @@
     "jackscript-js": "^1.0.1-Alpha",
     "level": "^7.0.1",
     "moment": "^2.29.1",
-    "nodemon": "^2.0.15",
+    "nodemon": "^2.0.20",
     "pre-commit": "^1.2.2",
     "prettier": "^2.4.1"
   },
   "devDependencies": {
-    "@types/node": "^16.10.2",
+    "@types/node": "^18.11.18",
     "axios": "^0.24.0"
   }
 }

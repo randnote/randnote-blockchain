@@ -38,6 +38,7 @@ exports.createTransaction = function (req, res) {
     }
     /* THIS IS A METHOD I TRIED THAT SENDS JUST THE STRING */
     var myJsonInfo = JSON.parse(req.body.obj);
+    console.log(req.body.obj);
     //console.log(myJsonInfo.fromAddressPrivateKey); // with all that i have done so far, I have ended up with this
     //
     var newTransaction = new transaction_1.default(myJsonInfo.fromAddress, myJsonInfo.toAddress, myJsonInfo.amount);
@@ -52,7 +53,7 @@ exports.createTransaction = function (req, res) {
     res.status(200).send({
         message: "Transaction from address: this, to address: this, was successful",
     });
-};
+}; // END OF CREATE TRANSACTION
 exports.getAddressBalance = function (req, res) {
     var address = req.params.address;
     var balance = note.getBalanceOfAddress(address);
