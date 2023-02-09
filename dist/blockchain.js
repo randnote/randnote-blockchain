@@ -150,10 +150,10 @@ var Blockchain = /** @class */ (function () {
             for (var _b = 0, _c = block.transactions; _b < _c.length; _b++) {
                 var trans = _c[_b];
                 if (address === trans.fromAddress) {
-                    balance -= trans.amount;
+                    balance = parseFloat(balance.toFixed(2)) - parseFloat(trans.amount);
                 }
                 if (address === trans.toAddress) {
-                    balance += trans.amount;
+                    balance = parseFloat(balance.toFixed(2)) + parseFloat(trans.amount);
                 }
             }
         }
