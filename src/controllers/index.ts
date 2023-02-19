@@ -115,3 +115,14 @@ exports.getSupply = (req: Request, res: Response) => {
 		supply: note.getSupply(),
 	});
 };
+
+
+exports.getTransactionsPerUser = (req: Request, res: Response) => {
+	let address = req.params.address;
+
+	let balance: number = note.getBalanceOfAddress(address);
+	res.status(200).send({
+		msg: `The balance of the address: ${address} is : ${balance}`,
+		balance: balance,
+	});
+};

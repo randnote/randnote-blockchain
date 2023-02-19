@@ -150,10 +150,14 @@ class Blockchain {
 		for (const block of this.chain) {
 			for (const trans of block.transactions) {
 				if (address === trans.fromAddress) {
-					balance = parseFloat(balance.toFixed(2)) - parseFloat(trans.amount);
+					balance =
+						parseFloat(balance.toFixed(2)) -
+						parseFloat(trans.amount);
 				}
 				if (address === trans.toAddress) {
-					balance = parseFloat(balance.toFixed(2)) + parseFloat(trans.amount);
+					balance =
+						parseFloat(balance.toFixed(2)) +
+						parseFloat(trans.amount);
 				}
 			}
 		}
@@ -210,6 +214,35 @@ class Blockchain {
 			}
 		}
 		return arr;
+	}
+
+	getTransactionsPerUser(){
+		let myaddress = "" // params go here...
+		let returnArray;
+		let returnObject = {}
+
+		this.chain.map(x=>{
+			if(x.hasOwnProperty('transactions')){
+				x.transactions.map(y =>{
+					if(y.fromAddress == myaddress){
+						returnObject = {
+							type: "sent",
+							notes: y.amount,
+							toFrom: y.toAddress
+						}
+						returnArray.push(returnObject);
+					}else if(y.toAddress == myaddress){
+						returnObject = {
+							type: "received",
+							notes: y.amount,
+							toFrom: y.fromAddress
+						}
+						returnArray.push(returnObject);
+					}
+				})
+			}
+		})
+		return returnArray;
 	}
 
 	getSupply() {
