@@ -120,11 +120,8 @@ exports.getTransactionsPerUser = (req: Request, res: Response) => {
 	let address = req.params.address;
 
 	// we call a function in the blockchain that gets us all of a users transactions in array format:
-	let transactions : Array<any> = [];
+	let transactions: Array<any> = [];
 	transactions = note.getTransactionsPerUser(address);
-	// res.status(200).send({
-	// 	transactions: transactions,
-	// });
 	res.status(200).send({
 		transactions: transactions,
 	});

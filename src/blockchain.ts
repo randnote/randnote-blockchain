@@ -218,7 +218,7 @@ class Blockchain {
 
 	getTransactionsPerUser(address: string) {
 		let myaddress = address; // params go here...
-		console.log(address)
+		console.log(address);
 		let returnArray: Array<any> = [];
 		let returnObject = {};
 
@@ -243,8 +243,8 @@ class Blockchain {
 				});
 			}
 		});
-		console.log(this.chain)
-		console.log(returnArray)
+		console.log(this.chain);
+		console.log(returnArray);
 		return returnArray;
 	}
 
