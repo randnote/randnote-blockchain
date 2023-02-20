@@ -9,7 +9,7 @@ module.exports = (app: Application) => {
 	app.get("/mine/:minerAddress/:minerSolution", B.mine);
 	app.get("/balance/:address", B.getAddressBalance);
 	app.get("/supply", B.getSupply);
-	app.get("/transactionsPerUser", B.getTransactionsPerUser);
+	app.get("/transactionsPerUser/:address", B.getTransactionsPerUser);
 
 	// randnote transact: This is used when user buys Notes, and the website needs to give Notes to that user.
 

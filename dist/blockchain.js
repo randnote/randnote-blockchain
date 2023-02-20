@@ -209,6 +209,37 @@ var Blockchain = /** @class */ (function () {
         }
         return arr;
     };
+    Blockchain.prototype.getTransactionsPerUser = function (address) {
+        var myaddress = address; // params go here...
+        console.log(address);
+        var returnArray = [];
+        var returnObject = {};
+        this.chain.map(function (x) {
+            if (x.hasOwnProperty("transactions")) {
+                x.transactions.map(function (y) {
+                    if (y.fromAddress == myaddress) {
+                        returnObject = {
+                            type: "sent",
+                            notes: y.amount,
+                            toFrom: y.toAddress,
+                        };
+                        returnArray.push(returnObject);
+                    }
+                    else if (y.toAddress == myaddress) {
+                        returnObject = {
+                            type: "received",
+                            notes: y.amount,
+                            toFrom: y.fromAddress,
+                        };
+                        returnArray.push(returnObject);
+                    }
+                });
+            }
+        });
+        console.log(this.chain);
+        console.log(returnArray);
+        return returnArray;
+    };
     Blockchain.prototype.getSupply = function () {
         return this.supply;
     };

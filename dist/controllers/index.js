@@ -82,4 +82,16 @@ exports.getSupply = function (req, res) {
         supply: note.getSupply(),
     });
 };
+exports.getTransactionsPerUser = function (req, res) {
+    var address = req.params.address;
+    // we call a function in the blockchain that gets us all of a users transactions in array format:
+    var transactions = [];
+    transactions = note.getTransactionsPerUser(address);
+    // res.status(200).send({
+    // 	transactions: transactions,
+    // });
+    res.status(200).send({
+        transactions: transactions,
+    });
+};
 //# sourceMappingURL=index.js.map

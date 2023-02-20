@@ -17,6 +17,7 @@ declare class Blockchain {
     getAllTransactions(): any;
     getBlockchain(result: any): void;
     getPendingTransactions(): any;
+    getTransactionsPerUser(address: string): any[];
     getSupply(): number;
 }
 export default Blockchain;

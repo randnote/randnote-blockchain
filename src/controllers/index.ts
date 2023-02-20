@@ -116,13 +116,16 @@ exports.getSupply = (req: Request, res: Response) => {
 	});
 };
 
-
 exports.getTransactionsPerUser = (req: Request, res: Response) => {
 	let address = req.params.address;
 
-	let balance: number = note.getBalanceOfAddress(address);
+	// we call a function in the blockchain that gets us all of a users transactions in array format:
+	let transactions : Array<any> = [];
+	transactions = note.getTransactionsPerUser(address);
+	// res.status(200).send({
+	// 	transactions: transactions,
+	// });
 	res.status(200).send({
-		msg: `The balance of the address: ${address} is : ${balance}`,
-		balance: balance,
+		transactions: transactions,
 	});
 };

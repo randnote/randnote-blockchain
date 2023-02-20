@@ -216,32 +216,35 @@ class Blockchain {
 		return arr;
 	}
 
-	getTransactionsPerUser(){
-		let myaddress = "" // params go here...
-		let returnArray;
-		let returnObject = {}
+	getTransactionsPerUser(address: string) {
+		let myaddress = address; // params go here...
+		console.log(address)
+		let returnArray: Array<any> = [];
+		let returnObject = {};
 
-		this.chain.map(x=>{
-			if(x.hasOwnProperty('transactions')){
-				x.transactions.map(y =>{
-					if(y.fromAddress == myaddress){
+		this.chain.map((x) => {
+			if (x.hasOwnProperty("transactions")) {
+				x.transactions.map((y) => {
+					if (y.fromAddress == myaddress) {
 						returnObject = {
 							type: "sent",
 							notes: y.amount,
-							toFrom: y.toAddress
-						}
+							toFrom: y.toAddress,
+						};
 						returnArray.push(returnObject);
-					}else if(y.toAddress == myaddress){
+					} else if (y.toAddress == myaddress) {
 						returnObject = {
 							type: "received",
 							notes: y.amount,
-							toFrom: y.fromAddress
-						}
+							toFrom: y.fromAddress,
+						};
 						returnArray.push(returnObject);
 					}
-				})
+				});
 			}
-		})
+		});
+		console.log(this.chain)
+		console.log(returnArray)
 		return returnArray;
 	}
 
