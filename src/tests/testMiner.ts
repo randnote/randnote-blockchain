@@ -72,8 +72,4 @@ const mineBlock = async () => {
 	);
 };
 
-// console.log("hello");
 mineBlock();
-
-// test by looking at the new blockchain
-// console.log(note.chain);

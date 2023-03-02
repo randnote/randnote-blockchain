@@ -17,7 +17,7 @@ class Block {
 		this.nonce = 0;
 	}
 
-	// calc the hash func of the block... creates the hash for our block
+	// calculate the hash func of the block... creates the hash for our block
 	calculateHash() {
 		return SHA256(
 			this.timestamp +
