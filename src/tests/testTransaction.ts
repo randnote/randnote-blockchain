@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { BLOCKCHAIN_API } from "..";
 
 /* for now , I dont just use the private and public key strings in the json sent to the server, instead; i use 
 now generate the keys on the fly.. however this should not be the case... i should be able to use the strings... or atleast use
@@ -21,9 +22,8 @@ const createTransaction = async () => {
 	let snack = JSON.stringify(jsonn);
 	// console.log)
 
-	Axios.post(`http://localhost:8033/transaction`, { obj: snack }).then(
+	Axios.post(`${BLOCKCHAIN_API}/transaction`, { obj: snack }).then(
 		async (response: any) => {
-			//
 			console.log(response.data);
 		}
 	);

@@ -4,6 +4,7 @@ import { response } from "express";
 import { exit } from "process";
 import Block from "../block";
 import { note } from "../controllers";
+import { BLOCKCHAIN_API, BACKEND_API, FRONTEND_API } from "..";
 
 // get argument for the name of the uer
 let minerName = process.argv.slice(2)[0];
@@ -21,7 +22,7 @@ const calculateHash = (
 
 const mineBlock = async () => {
 	// first get the block:
-	Axios.get(`http://localhost:8033/mine/${minerName}/0`).then(
+	Axios.get(`${BLOCKCHAIN_API}/mine/${minerName}/0`).then(
 		async (response: any) => {
 			// console.log(response.data);
 
@@ -63,7 +64,7 @@ const mineBlock = async () => {
 			console.log("BLOCK MINED: " + block["hash"]); // just displays the hash string
 
 			// now send to the server:
-			Axios.get(`http://localhost:8033/mine/${minerName}/${hash}`).then(
+			Axios.get(`${BLOCKCHAIN_API}/mine/${minerName}/${hash}`).then(
 				(response: any) => {
 					console.log(response.data);
 				}
