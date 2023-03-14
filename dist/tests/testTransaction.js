@@ -40,6 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
+var __1 = require("..");
 /* for now , I dont just use the private and public key strings in the json sent to the server, instead; i use
 now generate the keys on the fly.. however this should not be the case... i should be able to use the strings... or atleast use
 the strings but replicate the format in which the "signTransaction " file desires...
@@ -59,9 +60,8 @@ var createTransaction = function () { return __awaiter(void 0, void 0, void 0, f
         };
         snack = JSON.stringify(jsonn);
         // console.log)
-        axios_1.default.post("http://localhost:8033/transaction", { obj: snack }).then(function (response) { return __awaiter(void 0, void 0, void 0, function () {
+        axios_1.default.post("".concat(__1.BLOCKCHAIN_API, "/transaction"), { obj: snack }).then(function (response) { return __awaiter(void 0, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                //
                 console.log(response.data);
                 return [2 /*return*/];
             });

@@ -10,7 +10,7 @@ var Block = /** @class */ (function () {
         this.hash = this.calculateHash();
         this.nonce = 0;
     }
-    // calc the hash func of the block... creates the hash for our block
+    // calculate the hash func of the block... creates the hash for our block
     Block.prototype.calculateHash = function () {
         return SHA256(this.timestamp +
             this.previousHash +

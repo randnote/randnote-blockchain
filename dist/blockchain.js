@@ -115,10 +115,6 @@ var Blockchain = /** @class */ (function () {
             });
         });
     };
-    // function that allocated funds to users that are provided by the autoFunds file...
-    // we call this function to get the users in the db... then we allocate...
-    // allocateFunds(): void{
-    // }
     Blockchain.prototype.addTransaction = function (transaction) {
         if (!transaction.fromAddress || !transaction.toAddress) {
             throw new Error("Transaction must include from and to address");

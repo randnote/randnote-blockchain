@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
 var SHA256 = require("crypto-js/sha256");
+var __1 = require("..");
 // get argument for the name of the uer
 var minerName = process.argv.slice(2)[0];
 var calculateHash = function (timestamp, previousHash, transactions, nonce) {
@@ -49,7 +50,7 @@ var calculateHash = function (timestamp, previousHash, transactions, nonce) {
 var mineBlock = function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         // first get the block:
-        axios_1.default.get("http://localhost:8033/mine/".concat(minerName, "/0")).then(function (response) { return __awaiter(void 0, void 0, void 0, function () {
+        axios_1.default.get("".concat(__1.BLOCKCHAIN_API, "/mine/").concat(minerName, "/0")).then(function (response) { return __awaiter(void 0, void 0, void 0, function () {
             var block, difficulty, hash;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -78,7 +79,7 @@ var mineBlock = function () { return __awaiter(void 0, void 0, void 0, function 
                         }
                         console.log("BLOCK MINED: " + block["hash"]); // just displays the hash string
                         // now send to the server:
-                        axios_1.default.get("http://localhost:8033/mine/".concat(minerName, "/").concat(hash)).then(function (response) {
+                        axios_1.default.get("".concat(__1.BLOCKCHAIN_API, "/mine/").concat(minerName, "/").concat(hash)).then(function (response) {
                             console.log(response.data);
                         });
                         return [2 /*return*/];
@@ -88,8 +89,5 @@ var mineBlock = function () { return __awaiter(void 0, void 0, void 0, function 
         return [2 /*return*/];
     });
 }); };
-// console.log("hello");
 mineBlock();
-// test by looking at the new blockchain
-// console.log(note.chain);
 //# sourceMappingURL=testMiner.js.map

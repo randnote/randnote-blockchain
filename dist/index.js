@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.BACKEND_API = exports.FRONTEND_API = exports.BLOCKCHAIN_API = void 0;
 var express_1 = __importDefault(require("express"));
 var level = require("level");
 var cors = require("cors");
@@ -10,12 +11,27 @@ var bodyParser = require("body-parser");
 var app = (0, express_1.default)();
 app.use(express_1.default.urlencoded());
 app.use(express_1.default.json());
-// app.use(express.urlencoded({ extended: false }));
-var allowedOrigins = ["http://localhost:3000", "http://locahost:3000/admin"];
+// set environmental variables
+var BLOCKCHAIN_API = "";
+exports.BLOCKCHAIN_API = BLOCKCHAIN_API;
+var FRONTEND_API = "";
+exports.FRONTEND_API = FRONTEND_API;
+var BACKEND_API = "";
+exports.BACKEND_API = BACKEND_API;
+if (process.env.NODE_ENV == "development") {
+    exports.BLOCKCHAIN_API = BLOCKCHAIN_API = "http://localhost:8033";
+    exports.FRONTEND_API = FRONTEND_API = "http://localhost:3002";
+    exports.BACKEND_API = BACKEND_API = "http://localhost:8024";
+}
+else if (process.env.NODE_ENV == "production") {
+    exports.BLOCKCHAIN_API = BLOCKCHAIN_API = "https://blockchain.randnotex.co.za";
+    exports.FRONTEND_API = FRONTEND_API = "https://randnotex.co.za";
+    exports.BACKEND_API = BACKEND_API = "https://server.randnotex.co.za";
+}
+var allowedOrigins = ["".concat(FRONTEND_API), "".concat(FRONTEND_API, "/admin")];
 app.use(cors({
     origin: function (origin, callback) {
         // allow requests with no origin
-        // (like mobile apps or curl requests)
         if (!origin) {
             return callback(null, true);
         }
