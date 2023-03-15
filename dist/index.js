@@ -19,14 +19,14 @@ exports.FRONTEND_API = FRONTEND_API;
 var BACKEND_API = "";
 exports.BACKEND_API = BACKEND_API;
 if (process.env.NODE_ENV == "development") {
-    exports.BLOCKCHAIN_API = BLOCKCHAIN_API = "http://localhost:8033";
+    exports.BLOCKCHAIN_API = BLOCKCHAIN_API = "http://localhost:8034";
     exports.FRONTEND_API = FRONTEND_API = "http://localhost:3002";
     exports.BACKEND_API = BACKEND_API = "http://localhost:8024";
 }
 else if (process.env.NODE_ENV == "production") {
     exports.BLOCKCHAIN_API = BLOCKCHAIN_API = "https://blockchain.randnotex.co.za";
     exports.FRONTEND_API = FRONTEND_API = "https://randnotex.co.za";
-    exports.BACKEND_API = BACKEND_API = "https://server.randnotex.co.za";
+    exports.BACKEND_API = BACKEND_API = "https://backend.randnotex.co.za";
 }
 var allowedOrigins = ["".concat(FRONTEND_API), "".concat(FRONTEND_API, "/admin")];
 app.use(cors({
@@ -45,5 +45,5 @@ app.use(cors({
     },
 }));
 require("./routes/index")(app);
-app.listen(8033, function () { return console.log("server started on port 8033"); });
+app.listen(8034, function () { return console.log("server started on port 8034"); });
 //# sourceMappingURL=index.js.map
