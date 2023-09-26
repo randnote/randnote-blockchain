@@ -4,9 +4,9 @@ WORKDIR /blockchain
 
 COPY package.json ./
 
-COPY . .
-
 RUN yarn install
+
+COPY . .
 
 EXPOSE 8034
 
