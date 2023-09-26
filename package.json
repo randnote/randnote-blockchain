@@ -10,7 +10,7 @@
     "start": "tsc && cd ./dist && node ./index.js",
     "dev": "tsc && cd ./dist && nodemon ./index.js",
     "build": "tsc",
-    "prepare": "npm run build",
+    "prepare": "yarn run build",
     "prettier": "cd ./src && prettier --use-tabs --tab-width 4 --write ."
   },
   "pre-commit": [
@@ -19,6 +19,7 @@
   "author": "Daniel Romeo Mamphekgo",
   "license": "ISC",
   "dependencies": {
+    "ts-node": "latest",
     "@types/express": "^4.17.13",
     "cors": "^2.8.5",
     "crypto-js": "^4.0.0",

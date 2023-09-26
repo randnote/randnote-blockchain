@@ -2,11 +2,13 @@ FROM node:17-alpine
 
 WORKDIR /blockchain
 
-COPY package.json ./
+# COPY package.json ./
+
+COPY . .
 
 RUN yarn install
 
-COPY . .
+
 
 EXPOSE 8034
 
