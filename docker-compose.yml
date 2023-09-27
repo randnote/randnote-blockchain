@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  blockchain:
+    build: ./randnote-blockchain
+    container_name: blockchain_container
+    ports:
+      - '8034:8034'
+    volumes:
+      - ./randnote-blockchain:/blockchain #mapping local relative path to path on container
+      - ./blockchain/node_modules

@@ -1,6 +1,8 @@
 FROM node:17-alpine
 
-RUN yarn install -g nodemon
+# RUN npm install -g yarn
+# RUN yarn install -g nodemon
+RUN yarn global add nodemon
 
 WORKDIR /blockchain
 
