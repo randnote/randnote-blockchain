@@ -1,10 +1,29 @@
-version: "3.8"
-services:
-  blockchain:
-    build: ./randnote-blockchain
-    container_name: blockchain_container
-    ports:
-      - '8034:8034'
-    volumes:
-      - ./randnote-blockchain:/blockchain #mapping local relative path to path on container
-      - ./blockchain/node_modules
+# version: "3.8"
+# services:
+#   blockchain:
+#     build: ./randnote-blockchain
+#     container_name: blockchain_container
+#     ports:
+#       - '8034:8034'
+#     volumes:
+#       - ./randnote-blockchain:/blockchain #mapping local relative path to path on container
+#       - /blockchain/node_modules
+#   backend:
+#     build: ./randnotex-backend
+#     container_name: backend_container
+#     ports:
+#       - '8024:8024'
+#     volumes:
+#       - ./randnotex-backend:/backend
+#       - /randnotex-backend/node_modules
+#   mysql:
+#     image: mysql:5.7
+#     restart: always
+#     ports: 
+#       - '3306:3306'
+#     environment:
+#       - MYSQL_ROOT_PASSWORD=5308danielromeo
+#       - MYSQL_USER=danielromeo
+#       - MYSQL_PASSWORD=5308danielromeo
+#       - MYSQL_DATABASE=randnotex
+#     container_name: mysql-database
