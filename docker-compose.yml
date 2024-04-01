@@ -1,5 +1,6 @@
 version: "3.8"
 services:
+# 
   blockchain:
     build: ./randnote-blockchain
     container_name: blockchain_container
@@ -8,44 +9,61 @@ services:
     volumes:
       - ./randnote-blockchain:/blockchain #mapping local relative path to path on container
       - /blockchain/node_modules
+# 
   backend:
-    depends_on:
-      - mysql
-    build: ./randnotex-backend
     container_name: backend_container
-    ports:
-      - '8024:8024'
+    depends_on:
+      - mysqldb
     volumes:
       - ./randnotex-backend:/backend
       - /randnotex-backend/node_modules
+    build: ./randnotex-backend
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
     environment:
-      - HOST=mysql
-      - PORT=3307
-      - USER=root
-      - PASSWORD=5308danielromeo
-      - DB=randnotex
-    # command: ["./wait-for-it.sh", "mysql:3306"]
-
-  mysql:
+      - DB_HOST=mysqldb
+      - DB_USER=$MYSQLDB_USER
+      - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - DB_NAME=$MYSQLDB_DATABASE
+      - DB_PORT=$MYSQLDB_DOCKER_PORT
+    stdin_open: true
+    tty: true
+# 
+  mysqldb:
     image: mysql:5.7
-    restart: always
-    expose:
-      - 3307
-    ports: 
-      - '3307:3306'
+    restart: unless-stopped
+    env_file: ./.env
     environment:
-      - MYSQL_ROOT_PASSWORD=5308danielromeo
-      - MYSQL_USER=danielromeo
-      - MYSQL_PASSWORD=5308danielromeo
-      - MYSQL_DATABASE=randnotex
+      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+    ports:
+      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+    volumes:
+      - db:/var/lib/mysql
     container_name: mysql-database
-  # frontend:
-  #   build: ./randnote-exchange
-  #   container_name: frontend
-  #   ports:
-  #     - '3002:3002'
-  #   stdin_open: true
-  #   tty: true
-  #   volumes:
-  #     - ./randnote-exchange:/frontend
-  #     - /randnote-exchange/node_modules
+# 
+  automator:
+    depends_on:
+      - mysqldb
+      - backend
+      - blockchain
+    container_name: automator_container
+    build: ./randnote-automator
+    volumes:
+      - ./randnote-automator:/automator
+      - /automator/node_modules
+    environment:
+      - DB_HOST=mysqldb
+      - DB_USER=$MYSQLDB_USER
+      - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - DB_NAME=$MYSQLDB_DATABASE
+      - DB_PORT=$MYSQLDB_DOCKER_PORT
+    restart: unless-stopped
+    env_file: ./.env
+    stdin_open: true
+    tty: true
+
+volumes: 
+  db:
